@@ -1,24 +1,33 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, Button, Text } from "react-native";
+import { StyleSheet, View, SafeAreaView, Text, Button } from "react-native";
+import { withTheme } from "react-native-elements";
+import PhotoCard from "../components/PhotoCard";
 
 //rsf
-function HomeScreen({ route }) {
+function IntroScreen({ route, theme }) {
   return (
-    <View style={styles.background}>
-      <Text>INTRO</Text>
-      <Image
-        source={require(`../assets/AppBackground.png`)}
-        style={styles.eyeBallImg}
-      />
-    </View>
+    <SafeAreaView style={styles.safeArea(theme)}>
+      {/* <ImageBackground
+        source={require("../assets/AppBackground.png")}
+        style={styles.appBg}
+      > */}
+      <View style={styles.background}>
+        <Text>welcome to</Text>
+        <Text>dingdong baby</Text>
+        <PhotoCard />
+        <Button title="create some memories eternal" />
+      </View>
+      {/* </ImageBackground> */}
+    </SafeAreaView>
   );
 }
 
 //rnss
 const styles = StyleSheet.create({
-  appBg: {
-    color: "green"
-  }
+  safeArea: theme => ({
+    backgroundColor: theme.colors.Black,
+    flex: 1
+  })
 });
 
-export default HomeScreen;
+export default withTheme(IntroScreen);

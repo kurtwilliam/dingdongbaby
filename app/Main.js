@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { CountersContext } from "./state/CountersContext";
 import { storeData, getData } from "./storage";
 import HomeScreen from "./screens/HomeScreen";
+import IntroScreen from "./screens/IntroScreen";
 // import CountersScreen from "./screens/CountersScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
@@ -72,15 +73,15 @@ const Main = props => {
           <SafeAreaView style={styles.container(theme)}>
             <Stack.Navigator>
               <Stack.Screen
+                name="Intro"
+                component={IntroScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
-              {/* <Stack.Screen
-                name="Counters"
-                component={CountersScreen}
-                options={{ headerShown: false }}
-              /> */}
               <Stack.Screen
                 name="Settings"
                 component={SettingsScreen}
