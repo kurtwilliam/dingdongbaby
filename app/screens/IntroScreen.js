@@ -12,7 +12,7 @@ function IntroScreen({ route, theme }) {
         style={styles.appBg}
       > */}
       <View style={styles.background}>
-        <Text>welcome to</Text>
+        <Text>welcomeyo to</Text>
         <Text>dingdong baby</Text>
         <PhotoCard />
         <Button title="create some memories eternal" />

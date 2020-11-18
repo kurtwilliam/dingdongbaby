@@ -4,6 +4,7 @@ import { ThemeProvider } from "react-native-elements";
 import { withTheme } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import PouchDB from "pouchdb-react-native";
 
 import { CountersContext } from "./state/CountersContext";
 import { storeData, getData } from "./storage";
@@ -13,6 +14,10 @@ import IntroScreen from "./screens/IntroScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 
 const Stack = createStackNavigator();
+
+const db = new PouchDB("mydb");
+console.log("db.adapter", db.adapter);
+db.get("4711").then(doc => console.log("hello i am doc", doc));
 
 //rsf
 const Main = props => {
