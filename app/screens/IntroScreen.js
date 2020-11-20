@@ -4,7 +4,11 @@ import { withTheme } from "react-native-elements";
 import PhotoCard from "../components/PhotoCard";
 
 //rsf
-function IntroScreen({ route, theme }) {
+function IntroScreen({ navigation, route, theme }) {
+  const navigateHome = () => {
+    // TODO - set DB / user hasViewedIntro to false
+    return navigation.navigate("Home");
+  };
   return (
     <SafeAreaView style={styles.safeArea(theme)}>
       {/* <ImageBackground
@@ -15,7 +19,10 @@ function IntroScreen({ route, theme }) {
         <Text>welcomeyo to</Text>
         <Text>dingdong baby</Text>
         <PhotoCard />
-        <Button title="create some memories eternal" />
+        <Button
+          onPress={() => navigateHome()}
+          title="create some memories eternal"
+        />
       </View>
       {/* </ImageBackground> */}
     </SafeAreaView>

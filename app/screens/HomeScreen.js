@@ -9,23 +9,25 @@ import { withTheme } from "react-native-elements";
 
 //rsf
 function HomeScreen({ navigation, theme }) {
-  const { counters } = useContext(CountersContext);
-
   return (
     <SafeAreaView style={styles.safeArea(theme)}>
-      <Header navigation={navigation} />
-      <ScrollView style={styles.container(theme)}>
+      <View style={styles.containerView(theme)}>
+        <DailyChallengeContainer />
+        <ChallengesContainer />
+      </View>
+
+      {/* <ScrollView style={styles.container(theme)}>
         <View style={styles.containerView(theme)}>
           <SectionTitle sectionTitle={"Most recent"} />
-          {/* <View style={styles.counterContainer}>
+          <View style={styles.counterContainer}>
             {counters
               ? counters.map((counter, i) => (
                   <Card key={i} counter={counter} index={i} />
                 ))
               : null}
-          </View> */}
+          </View> 
         </View>
-      </ScrollView>
+      </ScrollView>*/}
     </SafeAreaView>
   );
 }
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     flex: 1,
-    minHeight: "100%",
+    minHeight: "100vh",
     backgroundColor: "red"
   }),
   safeArea: theme => ({

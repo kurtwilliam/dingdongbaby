@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import PouchDB from "pouchdb-react-native";
 
-import { CountersContext } from "./state/CountersContext";
+import { ChallengesContext } from "./state/ChallengesContext";
 import { storeData, getData } from "./storage";
 import HomeScreen from "./screens/HomeScreen";
 import IntroScreen from "./screens/IntroScreen";
@@ -68,7 +68,7 @@ const Main = props => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CountersContext.Provider
+      <ChallengesContext.Provider
         value={{
           settings,
           setSettings
@@ -95,7 +95,7 @@ const Main = props => {
             </Stack.Navigator>
           </SafeAreaView>
         </NavigationContainer>
-      </CountersContext.Provider>
+      </ChallengesContext.Provider>
     </ThemeProvider>
   );
 };
