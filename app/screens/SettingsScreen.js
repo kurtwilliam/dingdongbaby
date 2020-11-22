@@ -3,21 +3,19 @@ import { StyleSheet, View, SafeAreaView, ImageBackground } from "react-native";
 import Card from "../components/Card";
 import SectionTitle from "../components/SectionTitle";
 import Header from "../components/Header";
-import { CountersContext } from "../state/CountersContext";
+import { ChallengesContext } from "../state/ChallengesContext";
 import { withTheme } from "react-native-elements";
 // const backgroundImage = { uri:  };
 
 //rsf
 function SettingsScreen({ route, theme, navigation }) {
-  const { settings } = useContext(CountersContext);
-
   return (
     <SafeAreaView style={styles.safeArea(theme)}>
       {/* <ImageBackground
         source={require("../assets/AppBackground.png")}
         style={styles.appBg}
       > */}
-      <Header navigation={navigation} />
+      {/* <Header navigation={navigation} />
       <View style={styles.container(theme)}>
         <SectionTitle sectionTitle={"Settings"} />
         <View style={styles.counterContainer}>
@@ -27,7 +25,7 @@ function SettingsScreen({ route, theme, navigation }) {
               )
             : null}
         </View>
-      </View>
+      </View> */}
       {/* </ImageBackground> */}
     </SafeAreaView>
   );

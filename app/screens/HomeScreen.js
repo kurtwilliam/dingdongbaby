@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, SafeAreaView, ScrollView } from "react-native";
-import Card from "../components/Card";
-import Header from "../components/Header";
-import SectionTitle from "../components/SectionTitle";
-
-import { CountersContext } from "../state/CountersContext";
 import { withTheme } from "react-native-elements";
+import DailyChallengeContainer from "../components/DailyChallengeContainer";
+import ChallengesContainer from "../components/ChallengesContainer";
+import NavigationButtons from "../components/NavigationButtons";
 
 //rsf
 function HomeScreen({ navigation, theme }) {
+  console.log("theme");
   return (
     <SafeAreaView style={styles.safeArea(theme)}>
       <View style={styles.containerView(theme)}>
         <DailyChallengeContainer />
         <ChallengesContainer />
       </View>
+      <NavigationButtons />
 
       {/* <ScrollView style={styles.container(theme)}>
         <View style={styles.containerView(theme)}>
@@ -34,26 +34,14 @@ function HomeScreen({ navigation, theme }) {
 
 //rnss
 const styles = StyleSheet.create({
-  container: theme => ({
-    position: "relative",
-    flexDirection: "column",
-    flex: 1,
-    padding: 8,
-    paddingTop: 115,
-    background: "blue"
-  }),
   containerView: theme => ({
     position: "relative",
     flexDirection: "column",
     justifyContent: "space-between",
-    flex: 1,
-    minHeight: "100vh",
-    backgroundColor: "red"
-  }),
-  safeArea: theme => ({
-    backgroundColor: theme.colors.Black,
     flex: 1
-  })
+    // backgroundColor: "red"
+  }),
+  safeArea: theme => ({ flex: 1, backgroundColor: "beige" })
 });
 
 export default withTheme(HomeScreen);

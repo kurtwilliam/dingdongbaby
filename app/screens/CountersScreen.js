@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import Header from "../components/Header";
-import { CountersContext } from "../state/CountersContext";
+import { ChallengesContext } from "../state/ChallengesContext";
 import { withTheme } from "react-native-elements";
 
 //rsf
 function CountersScreen({ route, theme }) {
-  const { counters, numSelCounters } = useContext(CountersContext);
+  const { counters, numSelCounters } = useContext(ChallengesContext);
   return (
     <SafeAreaView style={styles.safeArea(theme)}>
       <Header />

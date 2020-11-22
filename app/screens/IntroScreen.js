@@ -6,6 +6,7 @@ import PhotoCard from "../components/PhotoCard";
 //rsf
 function IntroScreen({ navigation, route, theme }) {
   const navigateHome = () => {
+    console.log("navigate home");
     // TODO - set DB / user hasViewedIntro to false
     return navigation.navigate("Home");
   };
@@ -20,7 +21,7 @@ function IntroScreen({ navigation, route, theme }) {
         <Text>dingdong baby</Text>
         <PhotoCard />
         <Button
-          onPress={() => navigateHome()}
+          onPress={() => navigation.navigate("Home")}
           title="create some memories eternal"
         />
       </View>
