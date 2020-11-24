@@ -1,56 +1,55 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useContext, useState, useEffect, Fragment } from "react";
+import { StyleSheet, View, Text, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import AppContext from "../state/AppContext";
 
 import { withTheme } from "react-native-elements";
 
-function Challenge({ theme, challenge }) {
-  const { id, emoji, name, difficulty } = challenge;
-  console.log("challenge", challenge);
-
-  // TODO: refactor color of difficulty
-  return (
-    <View style={styles.container(theme)}>
-      <View style={styles.containerLeft(theme)}>
-        <Text style={styles.name}>{name}</Text>
-        <View style={styles.containerLeftDetails(theme)}>
-          <View style={styles.favContainer(theme)}>
-            <Text style={styles.idText(theme)}>{id}</Text>
-            <View style={styles.fav(theme)}>
-              <Text>star</Text>
-            </View>
-          </View>
-          <View
-            style={[
-              styles.difficultyContainer(theme),
-              difficulty === 1
-                ? styles.difficulty1
-                : difficulty === 2
-                ? styles.difficulty2
-                : styles.difficulty3
-            ]}
-          >
-            {[...Array(difficulty)].map((e, i) => (
-              <View
-                key={i}
-                style={[
-                  styles.difficultyCircle(theme),
-                  difficulty === 1
-                    ? styles.difficultyCircle1
-                    : difficulty === 2
-                    ? styles.difficultyCircle2
-                    : styles.difficultyCircle3
-                ]}
-              />
-            ))}
+const ChallengeDetails = ({
+  theme,
+  challenge: { name, id, difficulty, emoji }
+}) => (
+  <Fragment>
+    <View style={styles.containerLeft(theme)}>
+      <Text style={styles.name}>{name}</Text>
+      <View style={styles.containerLeftDetails(theme)}>
+        <View style={styles.favContainer(theme)}>
+          <Text style={styles.idText(theme)}>{id}</Text>
+          <View style={styles.fav(theme)}>
+            <Text>star</Text>
           </View>
         </View>
-      </View>
-      <View style={styles.containerRight(theme)}>
-        <Text style={styles.emoji}>{emoji}</Text>
+        <View
+          style={[
+            styles.difficultyContainer(theme),
+            difficulty === 1
+              ? styles.difficulty1
+              : difficulty === 2
+              ? styles.difficulty2
+              : styles.difficulty3
+          ]}
+        >
+          {[...Array(difficulty)].map((e, i) => (
+            <View
+              key={i}
+              style={[
+                styles.difficultyCircle(theme),
+                difficulty === 1
+                  ? styles.difficultyCircle1
+                  : difficulty === 2
+                  ? styles.difficultyCircle2
+                  : styles.difficultyCircle3
+              ]}
+            />
+          ))}
+        </View>
       </View>
     </View>
-  );
-}
+    <View style={styles.containerRight(theme)}>
+      <Text style={styles.emoji}>{emoji}</Text>
+    </View>
+  </Fragment>
+);
 
 //rnss
 const styles = StyleSheet.create({
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }),
   fav: theme => ({}),
-  name: 20,
+  name: { fontSize: 20 },
   idText: theme => ({
     backgroundColor: "grey",
     marginRight: 4,
@@ -120,4 +119,4 @@ const styles = StyleSheet.create({
   top: theme => ({})
 });
 
-export default withTheme(Challenge);
+export default withTheme(ChallengeDetails);

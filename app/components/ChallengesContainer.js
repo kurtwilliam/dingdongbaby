@@ -3,26 +3,18 @@ import { StyleSheet, View, Text } from "react-native";
 import { withTheme } from "react-native-elements";
 import ChallengesHeader from "./ChallengesHeader";
 import ChallengesContext from "../state/ChallengesContext";
-import UserContext from "../state/UserContext";
-import Challenge from "./Challenge";
+import HomeChallenge from "./HomeChallenge";
 
-function ChallengesContainer({ navigation, theme }) {
-  const challenges = useContext(ChallengesContext);
-  const user = useContext(UserContext);
+function ChallengesContainer({ theme }) {
+  const { challenges } = useContext(ChallengesContext);
 
-  const navigateToChallenge = () => {
-    console.log("navigate to challenge", navigation);
-  };
+  console.log("ah");
   return (
     <View style={styles.container(theme)}>
       <ChallengesHeader style={styles.top(theme)} />
       <View style={styles.challengesScroll(theme)}>
         {challenges.map(challenge => (
-          <Challenge
-            key={challenge.id}
-            onPress={() => navigateToChallenge()}
-            challenge={challenge}
-          />
+          <HomeChallenge key={challenge.id} challenge={challenge} />
         ))}
       </View>
     </View>

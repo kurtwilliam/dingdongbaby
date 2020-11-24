@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 
 import { withTheme } from "react-native-elements";
 
-function Card({ theme }) {
+function NavigationButtons({ theme }) {
   return (
     <View style={styles.container(theme)}>
       <View style={styles.buttonsContainer(theme)}>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   buttonsContainer: theme => ({})
 });
 
-export default withTheme(Card);
+export default withTheme(NavigationButtons);

@@ -9,6 +9,7 @@ import PouchDB from "pouchdb-react-native";
 
 import ChallengesContext from "./state/ChallengesContext";
 import UserContext from "./state/UserContext";
+import AppContext from "./state/AppContext";
 import { storeData, getData } from "./storage";
 import HomeScreen from "./screens/HomeScreen";
 import IntroScreen from "./screens/IntroScreen";
@@ -26,6 +27,7 @@ const Main = props => {
   // const [settings, setSettings] = useState([]);
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState({});
+  const [selectedChallenge, setSelectedChallenge] = useState(null);
 
   let theme = {
     colors: {
@@ -136,6 +138,7 @@ const Main = props => {
         unlockedChallenges: [],
         completedPhotos: [
           {
+            id: 1,
             challengeId: 1,
             path: "",
             dateUploaded: "" //moment().format();
@@ -158,37 +161,40 @@ const Main = props => {
   //   await storeData({
   //     settings
   //   });
-  console.log("user.hasViewedIntro ", user);
 
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <ChallengesContext.Provider value={challenges}>
-          <UserContext.Provider value={user}>
-            <SafeAreaView style={styles.container(theme)}>
-              <Stack.Navigator>
-                <Stack.Screen
-                  name="Intro"
-                  component={IntroScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Home"
-                  component={HomeScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Challenge"
-                  component={ChallengeScreen}
-                  options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                  name="Settings"
-                  component={SettingsScreen}
-                  options={{ headerShown: false }}
-                />
-              </Stack.Navigator>
-            </SafeAreaView>
+        <ChallengesContext.Provider value={{ challenges, setChallenges }}>
+          <UserContext.Provider value={{ user, setUser }}>
+            <AppContext.Provider
+              value={{ selectedChallenge, setSelectedChallenge }}
+            >
+              <SafeAreaView style={styles.container(theme)}>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    name="Intro"
+                    component={IntroScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Challenge"
+                    component={ChallengeScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Settings"
+                    component={SettingsScreen}
+                    options={{ headerShown: false }}
+                  />
+                </Stack.Navigator>
+              </SafeAreaView>
+            </AppContext.Provider>
           </UserContext.Provider>
         </ChallengesContext.Provider>
       </ThemeProvider>
