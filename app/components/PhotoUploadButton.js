@@ -27,6 +27,8 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
       quality: 1
     });
 
+    console.log("result", result);
+
     if (!result.cancelled) {
       const newUser = JSON.parse(JSON.stringify(user));
       const thisImageIndex = newUser.completedPhotos.indexOf(
@@ -37,17 +39,19 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
         newUser.completedPhotos[
           thisImageIndex
         ].dateUploaded = moment().format();
+        newUser.completedPhotos[thisImageIndex].width = result.width;
+        newUser.completedPhotos[thisImageIndex].height = result.height;
       } else {
         newUser.completedPhotos.push({
           id: newUser.completedPhotos.length,
           challengeId: selectedChallenge,
           path: result.uri,
-          dateUploaded: moment().format()
+          dateUploaded: moment().format(),
+          height: result.height,
+          width: result.width
         });
       }
-      if (!result.cancelled) {
-        setUser(newUser);
-      }
+      setUser(newUser);
     }
   };
 

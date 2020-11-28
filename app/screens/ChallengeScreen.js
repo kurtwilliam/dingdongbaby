@@ -29,46 +29,47 @@ function ChallengeScreen({ navigation, theme }) {
   );
   const challenge = challenges.find(chal => chal.id === selectedChallenge);
   const { desc, warning, tip } = challenge;
-  <SafeAreaView style={styles.safeArea(theme)}>
-    {/* <ImageBackground
+  return (
+    <SafeAreaView style={styles.safeArea(theme)}>
+      {/* <ImageBackground
         source={require("../assets/AppBackground.png")}
         style={styles.appBg}
       > */}
-    <View style={styles.container(theme)}>
-      <View style={styles.cardContainer(theme)}>
-        {image && image.path ? (
-          <Image
-            resizeMode={"cover"}
-            source={{ uri: image.path }}
-            style={{ width: "100%", minHeight: 400, borderRadius: 8 }}
-          />
-        ) : (
-          []
-        )}
-        <View style={styles.detailsContainer(theme)}>
-          <ChallengeDetails challenge={challenge} />
+      <View style={styles.container(theme)}>
+        <View style={styles.cardContainer(theme)}>
+          {image && image.path ? (
+            <Image
+              resizeMode={"cover"}
+              source={{ uri: image.path }}
+              style={{ width: "100%", minHeight: 400, borderRadius: 8 }}
+            />
+          ) : (
+            []
+          )}
+          <View style={styles.detailsContainer(theme)}>
+            <ChallengeDetails challenge={challenge} />
+          </View>
+          <View style={styles.gradientLine(theme)}></View>
+          <Text style={styles.desc(theme)}>{desc}</Text>
+          {tip.length ? (
+            <View style={styles.tipContainer(theme)}>
+              <Text>{tip}</Text>
+            </View>
+          ) : (
+            []
+          )}
+          {warning.length ? (
+            <View style={styles.warningContainer(theme)}>
+              <Text>{warning}</Text>
+            </View>
+          ) : (
+            []
+          )}
         </View>
-        <View style={styles.gradientLine(theme)}></View>
-        <Text style={styles.desc(theme)}>{desc}</Text>
-        {tip.length ? (
-          <View style={styles.tipContainer(theme)}>
-            <Text>{tip}</Text>
-          </View>
-        ) : (
-          []
-        )}
-        {warning.length ? (
-          <View style={styles.warningContainer(theme)}>
-            <Text>{warning}</Text>
-          </View>
-        ) : (
-          []
-        )}
       </View>
-    </View>
-    <PhotoUploadButton image={image} selectedChallenge={selectedChallenge} />
+      <PhotoUploadButton image={image} selectedChallenge={selectedChallenge} />
 
-    {/* <View style={styles.containerLeft(theme)}>
+      {/* <View style={styles.containerLeft(theme)}>
         <Text>{name}</Text>
         <View style={styles.containerLeftDetails(theme)}>
           <View style={styles.favContainer(theme)}>
@@ -85,7 +86,8 @@ function ChallengeScreen({ navigation, theme }) {
       <View style={styles.containerRight(theme)}>
         <Text>{emoji}</Text>
       </View> */}
-  </SafeAreaView>;
+    </SafeAreaView>
+  );
 }
 
 //rnss

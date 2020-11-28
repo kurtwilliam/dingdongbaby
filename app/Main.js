@@ -5,7 +5,7 @@ import { ThemeProvider } from "react-native-elements";
 import { withTheme } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import PouchDB from "pouchdb-react-native";
+import axios from "axios";
 
 import ChallengesContext from "./state/ChallengesContext";
 import UserContext from "./state/UserContext";
@@ -16,11 +16,15 @@ import IntroScreen from "./screens/IntroScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import ChallengeScreen from "./screens/ChallengeScreen";
 
-const Stack = createStackNavigator();
+import storageHelpers from "./helpers/storageHelpers";
 
-const db = new PouchDB("mydb");
-console.log("db.adapter", db.adapter);
-db.get("4711").then(doc => console.log("hello i am doc", doc));
+const Stack = createStackNavigator();
+// const isTesting = true;
+// if (isTesting) {
+axios.defaults.baseURL = `https://dindongbaby.loca.lt`;
+// } else {
+// TODO: Add server url
+//}
 
 //rsf
 const Main = props => {
@@ -28,6 +32,7 @@ const Main = props => {
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState({});
   const [selectedChallenge, setSelectedChallenge] = useState(null);
+  // const [ipAddress, setIpAddress] = useState();
 
   let theme = {
     colors: {
@@ -38,6 +43,9 @@ const Main = props => {
 
   useEffect(() => {
     async function fetchData() {
+      let newServerUrl;
+      // const ip = await storageHelpers.getIPFromAmazon();
+      // setIpAddress(ip.trim());
       // const storageState = await getData().catch(err => console.log(err));
       // const { settings } = storageState;
 
@@ -120,31 +128,10 @@ const Main = props => {
           difficulty: 1
         }
       ]);
-      setUser({
-        id: 1,
-        name: "Ali",
-        gender: "female",
-        babyName: "Monkey",
-        babyYearOfBirth: 2011,
-        babyMonthOfBirth: 7,
-        babyDayOfBirth: 6,
-        babyGender: "female",
-        partnerName: "matt",
-        partnerGender: "male",
-        hasCat: true,
-        hasDog: false,
-        dateSignedUp: "2020-11-20T12:53:51-05:00", //moment().format();
-        hasViewedIntro: false,
-        unlockedChallenges: [],
-        completedPhotos: [
-          {
-            id: 1,
-            challengeId: 1,
-            path: "",
-            dateUploaded: "" //moment().format();
-          }
-        ]
-      });
+
+      const serverUser = await storageHelpers.getUserFromServer(newServerUrl);
+
+      setUser(serverUser);
     }
     fetchData();
   }, []);
@@ -161,7 +148,7 @@ const Main = props => {
   //   await storeData({
   //     settings
   //   });
-
+  console.log(user);
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
