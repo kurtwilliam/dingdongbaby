@@ -11,7 +11,6 @@ function ChallengesContainer({ theme }) {
   console.log("ah");
   return (
     <View style={styles.container(theme)}>
-      <ChallengesHeader style={styles.top(theme)} />
       <View style={styles.challengesScroll(theme)}>
         {challenges.map(challenge => (
           <HomeChallenge key={challenge.id} challenge={challenge} />
@@ -27,7 +26,6 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1
   }),
-  top: theme => ({}),
   challengesScroll: theme => ({
     width: "100%",
     paddingLeft: 16,

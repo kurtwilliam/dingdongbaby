@@ -139,11 +139,13 @@ const styles = StyleSheet.create({
     padding: 4,
     background: "lightblue"
   }),
+  tipContainer: theme => ({}),
   warning: theme => ({
     width: "100%",
     padding: 4,
     background: "gold"
-  })
+  }),
+  warningContainer: theme => ({})
 });
 
 export default withTheme(ChallengeScreen);

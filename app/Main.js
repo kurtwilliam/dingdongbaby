@@ -5,6 +5,8 @@ import { ThemeProvider } from "react-native-elements";
 import { withTheme } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useFonts } from "expo-font";
+import { AppLoading } from "expo";
 import axios from "axios";
 
 import ChallengesContext from "./state/ChallengesContext";
@@ -32,12 +34,16 @@ const Main = props => {
   const [challenges, setChallenges] = useState([]);
   const [user, setUser] = useState({});
   const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const [fontLoaded] = useFonts({
+    SFCompactRoundedBold: require("../assets/fonts/SF-Compact-Rounded-Bold.otf")
+  });
   // const [ipAddress, setIpAddress] = useState();
 
   let theme = {
     colors: {
       primary: "#EAE6E1",
-      Beige1: "#EAE6E1"
+      Beige1: "#EAE6E1",
+      BGBeige: "#F6F3EF"
     }
   };
 
@@ -149,6 +155,9 @@ const Main = props => {
   //     settings
   //   });
   console.log(user);
+  if (!fontLoaded) {
+    return <AppLoading />;
+  }
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>

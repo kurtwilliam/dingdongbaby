@@ -9,7 +9,7 @@ function ChallengesHeader({ navigation, theme }) {
   };
   return (
     <View style={styles.container(theme)}>
-      <Text>Challenges</Text>
+      <Text style={styles.challengesFont(theme)}>Challenges</Text>
     </View>
   );
 }
@@ -17,7 +17,12 @@ function ChallengesHeader({ navigation, theme }) {
 //rnss
 const styles = StyleSheet.create({
   container: theme => ({
-    position: "relative"
+    position: "relative",
+    backgroundColor: "red"
+  }),
+  challengesFont: theme => ({
+    fontSize: 30,
+    fontFamily: "SFCompactRoundedBold"
   }),
   top: theme => ({})
 });
