@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   }),
   safeArea: theme => ({
     flex: 1,
-    backgroundColor: theme.BGBeige
+    backgroundColor: theme.colors.BGBeige
   })
 });
 

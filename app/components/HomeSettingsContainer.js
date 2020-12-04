@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import SettingsBaby from "../assets/svgs/settingsBaby";
+import SettingsBaby from "../assets/svgs/SettingsBaby";
 import { withTheme } from "react-native-elements";
 
 function HomeSettingsContainer({ theme }) {

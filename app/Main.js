@@ -43,7 +43,10 @@ const Main = props => {
     colors: {
       primary: "#EAE6E1",
       Beige1: "#EAE6E1",
-      BGBeige: "#F6F3EF"
+      BGBeige: "#F6F3EF",
+
+      G2: "#E8E6E2",
+      G6: "#847F73"
     }
   };
 
