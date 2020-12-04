@@ -2,8 +2,18 @@ import React, { useContext, useState, useEffect, Fragment } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppContext from "../state/AppContext";
+import Star from "../assets/svgs/Star";
+import Spacer from "./Spacer";
 
 import { withTheme } from "react-native-elements";
+
+const calcId = id => {
+  let newId = id;
+  let length = id.toString().length;
+  if (length === 1) newId = "00" + id;
+  else if (length === 2) newId = "0" + id;
+  return newId;
+};
 
 const ChallengeDetails = ({
   theme,
@@ -11,36 +21,41 @@ const ChallengeDetails = ({
 }) => (
   <Fragment>
     <View style={styles.containerLeft(theme)}>
-      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.name(theme)}>{name}</Text>
       <View style={styles.containerLeftDetails(theme)}>
         <View style={styles.favContainer(theme)}>
-          <Text style={styles.idText(theme)}>{id}</Text>
+          <Text style={styles.idText(theme)}>{calcId(id)}</Text>
           <View style={styles.fav(theme)}>
-            <Text>star</Text>
+            <Star color={theme.colors.G2} />
           </View>
         </View>
         <View
           style={[
             styles.difficultyContainer(theme),
             difficulty === 1
-              ? styles.difficulty1
+              ? styles.difficulty1(theme)
               : difficulty === 2
-              ? styles.difficulty2
-              : styles.difficulty3
+              ? styles.difficulty2(theme)
+              : styles.difficulty3(theme)
           ]}
         >
           {[...Array(difficulty)].map((e, i) => (
-            <View
-              key={i}
-              style={[
-                styles.difficultyCircle(theme),
-                difficulty === 1
-                  ? styles.difficultyCircle1
-                  : difficulty === 2
-                  ? styles.difficultyCircle2
-                  : styles.difficultyCircle3
-              ]}
-            />
+            <>
+              <View
+                key={i}
+                style={[
+                  styles.difficultyCircle(theme),
+                  difficulty === 1
+                    ? styles.difficultyCircle1(theme)
+                    : difficulty === 2
+                    ? styles.difficultyCircle2(theme)
+                    : styles.difficultyCircle3(theme)
+                ]}
+              />
+              {i === difficulty - 1 ? null : (
+                <Spacer width={4} height={"100%"} />
+              )}
+            </>
           ))}
         </View>
       </View>
@@ -61,14 +76,12 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 12,
     background: "#FFFFFF",
-    paddingTop: 12,
-    paddingLeft: 12,
-    paddingBottom: 12,
-    paddingRight: 12
+    padding: 12
   }),
   containerLeft: theme => ({
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    flex: 1
   }),
   containerLeftDetails: theme => ({
     justifyContent: "space-between",
@@ -78,43 +91,59 @@ const styles = StyleSheet.create({
     width: "30%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "gold",
-    borderRadius: 8
+    backgroundColor: theme.colors.G1,
+    borderRadius: 8,
+    minHeight: 75,
+    marginLeft: 8
   }),
   favContainer: theme => ({
     justifyContent: "flex-start",
     flexDirection: "row"
   }),
   fav: theme => ({}),
-  name: { fontSize: 20 },
+  name: theme => ({
+    fontSize: 20,
+    color: theme.colors.G9,
+    textTransform: "lowercase"
+  }),
   idText: theme => ({
-    backgroundColor: "grey",
+    backgroundColor: theme.colors.G2,
+    color: theme.colors.G6,
+    textAlignVertical: "center",
+    fontSize: 12,
     marginRight: 4,
     paddingTop: 1,
     paddingBottom: 1,
     paddingRight: 4,
     paddingLeft: 4,
-    borderRadius: 50
+    borderRadius: 50,
+    height: 18,
+    justifyContent: "center",
+    alignItems: "center",
+    lineHeight: 14
   }),
   difficultyContainer: theme => ({
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 4,
+    padding: 4,
     borderRadius: 50,
     flexDirection: "row"
   }),
   difficultyCircle: theme => ({
-    width: 9,
-    height: 9,
-    borderRadius: 50,
-    marginRight: 4
+    width: 10,
+    height: 10,
+    borderRadius: 6
   }),
-  difficulty1: { backgroundColor: "blue" },
-  difficulty2: { backgroundColor: "yellow" },
-  difficulty3: { backgroundColor: "red" },
-  difficultyCircle1: { backgroundColor: "green" },
-  difficultyCircle2: { backgroundColor: "purple" },
-  difficultyCircle3: { backgroundColor: "grey" },
+  difficultyCircle1: theme => ({ backgroundColor: theme.colors.InfoSecondary }),
+  difficultyCircle2: theme => ({
+    backgroundColor: theme.colors.WarningSecondary
+  }),
+  difficultyCircle3: theme => ({
+    backgroundColor: theme.colors.ErrorSecondary
+  }),
+  difficulty1: theme => ({ backgroundColor: theme.colors.InfoTertiary }),
+  difficulty2: theme => ({
+    backgroundColor: theme.colors.WarningTertiary
+  }),
+  difficulty3: theme => ({ backgroundColor: theme.colors.ErrorTertiary }),
   emoji: { fontSize: 32 },
   top: theme => ({})
 });

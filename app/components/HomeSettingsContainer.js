@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "flex-end",
-    backgroundColor: "pink"
+    paddingLeft: 16,
+    paddingRight: 16
   }),
   top: theme => ({})
 });

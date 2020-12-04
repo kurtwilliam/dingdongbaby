@@ -6,7 +6,7 @@ import ChallengeDetails from "./ChallengeDetails";
 
 import { withTheme } from "react-native-elements";
 
-function Challenge({ theme, challenge }) {
+function HomeChallenge({ theme, challenge }) {
   const { setSelectedChallenge } = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -35,12 +35,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     borderRadius: 12,
-    background: "#FFFFFF",
-    paddingTop: 12,
-    paddingLeft: 12,
-    paddingBottom: 12,
-    paddingRight: 12
+    backgroundColor: theme.colors.PureWhite,
+    padding: 12,
+    marginBottom: 4
   })
 });
 
-export default withTheme(Challenge);
+export default withTheme(HomeChallenge);

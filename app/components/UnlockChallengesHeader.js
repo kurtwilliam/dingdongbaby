@@ -2,33 +2,21 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 
 import { withTheme } from "react-native-elements";
-import Checkmark from "../assets/svgs/Checkmark";
+import Locked from "../assets/svgs/Locked";
 import CircleBar from "./CircleBar";
 
-function ChallengesHeader({ navigation, theme }) {
+function UnlockChallengesHeader({ navigation, theme }) {
   const navigateToChallenge = () => {
     console.log("navigate to challenge", navigation);
   };
-  const numChallengesComplete = 125;
-  const numChallenges = 200;
 
   return (
     <View style={styles.cont(theme)}>
       <View style={styles.challengesCont(theme)}>
-        <Text style={styles.challengesFont(theme)}>Challenges</Text>
-        <View style={styles.totalCont(theme)}>
-          <View style={styles.checkCont(theme)}>
-            <Checkmark stroke={theme.colors.G6} />
-          </View>
-          <Text style={styles.checkCount(theme)}>
-            {numChallengesComplete}/{numChallenges}
-          </Text>
-        </View>
+        <Text style={styles.challengesFont(theme)}>complete to unlock</Text>
+        <Locked />
       </View>
-      <CircleBar
-        numChallengesComplete={numChallengesComplete}
-        numChallenges={numChallenges}
-      />
+      <CircleBar />
     </View>
   );
 }
@@ -38,18 +26,14 @@ const styles = StyleSheet.create({
   challengesCont: theme => ({
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "flex-end"
   }),
   cont: theme => ({
     position: "relative",
-    paddingLeft: 16,
-    paddingRight: 16
+    backgroundColor: "red"
   }),
   challengesFont: theme => ({
-    fontSize: 32,
-    letterSpacing: 0.374,
-    lineHeight: 42,
-    color: theme.colors.G7,
+    fontSize: 30,
     fontFamily: "SFCompactRoundedBold",
     textTransform: "lowercase"
   }),
@@ -72,4 +56,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default withTheme(ChallengesHeader);
+export default withTheme(UnlockChallengesHeader);

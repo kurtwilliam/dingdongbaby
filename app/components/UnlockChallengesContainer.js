@@ -4,13 +4,18 @@ import { withTheme } from "react-native-elements";
 import ChallengesHeader from "./ChallengesHeader";
 import ChallengesContext from "../state/ChallengesContext";
 import HomeChallenge from "./HomeChallenge";
+import HomeUpsellContainer from "./HomeUpsellContainer";
+import UnlockChallengesHeader from "./UnlockChallengesHeader";
 
-function ChallengesContainer({ theme }) {
+function UnlockChallengesContainer({ theme }) {
   const { challenges } = useContext(ChallengesContext);
 
   console.log("ah");
   return (
     <View style={styles.container(theme)}>
+      <UnlockChallengesHeader />
+      <HomeUpsellContainer />
+
       <View style={styles.challengesScroll(theme)}>
         {challenges.map(challenge => (
           <HomeChallenge key={challenge.id} challenge={challenge} />
@@ -28,9 +33,11 @@ const styles = StyleSheet.create({
   }),
   challengesScroll: theme => ({
     width: "100%",
+    paddingLeft: 16,
+    paddingRight: 16,
     flex: 1,
     flexDirection: "column"
   })
 });
 
-export default withTheme(ChallengesContainer);
+export default withTheme(UnlockChallengesContainer);

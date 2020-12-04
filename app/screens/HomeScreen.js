@@ -9,8 +9,10 @@ import {
 import { withTheme } from "react-native-elements";
 import DailyChallengeContainer from "../components/DailyChallengeContainer";
 import ChallengesContainer from "../components/ChallengesContainer";
+import UnlockChallengesContainer from "../components/UnlockChallengesContainer";
 import ChallengesHeader from "../components/ChallengesHeader";
 import HomeSettingsContainer from "../components/HomeSettingsContainer";
+import Spacer from "../components/Spacer";
 import NavigationButtons from "../components/NavigationButtons";
 
 // TODO: compress bg img further
@@ -28,8 +30,12 @@ function HomeScreen({ navigation, theme }) {
           {/* <DailyChallengeContainer /> */}
           <HomeSettingsContainer />
           <ChallengesHeader />
+          <Spacer width={"100%"} height={24} />
+          <View style={styles.darkContainer(theme)}>
+            <ChallengesContainer />
+            <UnlockChallengesContainer />
+          </View>
         </View>
-        <ChallengesContainer />
 
         <NavigationButtons />
 
@@ -63,9 +69,14 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     // flex: 1,
-    paddingTop: 40,
-    paddingLeft: 16,
-    paddingRight: 16
+    paddingTop: 40
+  }),
+  darkContainer: theme => ({
+    borderRadius: 16,
+    width: "100%",
+    padding: 16,
+    backgroundColor: "#E0DDD7",
+    height: "100%"
   }),
   safeArea: theme => ({
     flex: 1,
