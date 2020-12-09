@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-community/async-storage";
-const STORAGE_KEY = "storage";
+const STORAGE_KEY = "ddb-user";
 export const storeData = async appState => {
   try {
     const jsonAppState = JSON.stringify(appState);
-    // console.log("appState", appState);
+    console.log("appState", appState);
 
     await AsyncStorage.setItem(STORAGE_KEY, jsonAppState).catch(err =>
       console.log(err)

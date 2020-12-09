@@ -53,7 +53,7 @@ const ChallengeDetails = ({
                 ]}
               />
               {i === difficulty - 1 ? null : (
-                <Spacer width={4} height={"100%"} />
+                <Spacer key={`spacer${i}`} width={4} height={"100%"} />
               )}
             </>
           ))}

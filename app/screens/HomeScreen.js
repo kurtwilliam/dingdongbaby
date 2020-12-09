@@ -7,80 +7,45 @@ import {
   ImageBackground
 } from "react-native";
 import { withTheme } from "react-native-elements";
-import DailyChallengeContainer from "../components/DailyChallengeContainer";
+import AppBackground from "../components/AppBackground";
 import ChallengesContainer from "../components/ChallengesContainer";
 import UnlockChallengesContainer from "../components/UnlockChallengesContainer";
 import ChallengesHeader from "../components/ChallengesHeader";
 import HomeSettingsContainer from "../components/HomeSettingsContainer";
 import Spacer from "../components/Spacer";
-import NavigationButtons from "../components/NavigationButtons";
 
 // TODO: compress bg img further
 
 //rsf
-function HomeScreen({ navigation, theme }) {
-  console.log("theme");
-  return (
-    <SafeAreaView style={styles.safeArea(theme)}>
-      <ImageBackground
-        source={require("../assets/AppBackground.png")}
-        style={styles.appBg}
-      >
-        <View style={styles.containerView(theme)}>
-          {/* <DailyChallengeContainer /> */}
-          <HomeSettingsContainer />
-          <ChallengesHeader />
-          <Spacer width={"100%"} height={24} />
-          <View style={styles.darkContainer(theme)}>
-            <ChallengesContainer />
-            <UnlockChallengesContainer />
-          </View>
-        </View>
-
-        <NavigationButtons />
-
-        {/* <ScrollView style={styles.container(theme)}>
-        <View style={styles.containerView(theme)}>
-          <SectionTitle sectionTitle={"Most recent"} />
-          <View style={styles.counterContainer}>
-            {counters
-              ? counters.map((counter, i) => (
-                  <Card key={i} counter={counter} index={i} />
-                ))
-              : null}
-          </View> 
-        </View>
-      </ScrollView>*/}
-      </ImageBackground>
-    </SafeAreaView>
-  );
-}
+const HomeScreen = ({ navigation, theme }) => (
+  <AppBackground hasNavigationButtons={true}>
+    <View>
+      <HomeSettingsContainer />
+      <ChallengesHeader />
+      <Spacer width={"100%"} height={24} />
+      <View style={styles.darkContainer(theme)}>
+        <ChallengesContainer />
+        {/* <Spacer width={"100%"} height={30} /> */}
+        <UnlockChallengesContainer />
+      </View>
+    </View>
+  </AppBackground>
+);
 
 //rnss
 const styles = StyleSheet.create({
-  appBg: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "repeat"
-  },
-  containerView: theme => ({
+  cont: theme => ({
     position: "relative",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    // flex: 1,
-    paddingTop: 40
+    paddingTop: 32,
+    minHeight: "100%"
   }),
   darkContainer: theme => ({
-    borderRadius: 16,
+    flex: 1,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
     width: "100%",
     padding: 16,
-    backgroundColor: "#E0DDD7",
-    height: "100%"
-  }),
-  safeArea: theme => ({
-    flex: 1,
-    backgroundColor: theme.colors.BGBeige
+    backgroundColor: "#E0DDD7"
   })
 });
 

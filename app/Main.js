@@ -17,7 +17,7 @@ import HomeScreen from "./screens/HomeScreen";
 import IntroScreen from "./screens/IntroScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import ChallengeScreen from "./screens/ChallengeScreen";
-
+import theme from "./theme";
 import storageHelpers from "./helpers/storageHelpers";
 
 const Stack = createStackNavigator();
@@ -39,59 +39,24 @@ const Main = props => {
   });
   // const [ipAddress, setIpAddress] = useState();
 
-  let theme = {
-    colors: {
-      primary: "#EAE6E1",
-      Beige1: "#EAE6E1",
-      BGBeige: "#F6F3EF",
-      PureWhite: "#FFF",
-      SuccessPrimary: "#52C41A",
-      SuccessSecondary: "#A4EA6E",
-      SuccessTertiary: "#E9F9D9",
-      InfoPrimary: "#1890FF",
-      InfoSecondary: "#80CDFD",
-      InfoTertiary: "#E6F7FF",
-      WarningPrimary: "#ECA61B",
-      WarningSecondary: "#FFDE70",
-      WarningTertiary: "#FFF9DA",
-      ErrorPrimary: "#FF4D4F",
-      ErrorSecondary: "#FFC1BB",
-      ErrorTertiary: "#FFF2F0",
-      G1: "#FAF9F7",
-      G2: "#E8E6E2",
-      G3: "#DAD7D2",
-      G4: "#B7B2A8",
-      G5: "#A29E94",
-      G6: "#847F73",
-      G7: "#615D53",
-      G8: "#4F4A41",
-      G9: "#413D34",
-      G10: "#27241E",
-      Gradient: [
-        "#EDDCD8",
-        "#E6E8D6",
-        "#CEF4E0",
-        "#BEECEA",
-        "#A4ACEB",
-        "#D7A4D7",
-        "#F7C4C0",
-        "#FAECCD",
-        "#DFF3E9",
-        "#B0E2F9",
-        "#7CA6EC"
-      ]
-    }
-  };
-
   useEffect(() => {
     async function fetchData() {
       let newServerUrl;
       // const ip = await storageHelpers.getIPFromAmazon();
       // setIpAddress(ip.trim());
-      // const storageState = await getData().catch(err => console.log(err));
+      await getData()
+        .then(data => {
+          console.log("storageData", data);
+          if (Object.keys(user).length) {
+            setUser(data);
+          } else {
+            setUser(storageHelpers.setInitialUser);
+          }
+        })
+        .catch(err => console.log(err));
       // const { settings } = storageState;
 
-      // TODO fetch data from server from DB
+      // TODO fetch data from server from DB if Authenticated
 
       // setSettings(
       //   Object.keys(settings).length > 0
@@ -173,7 +138,7 @@ const Main = props => {
 
       const serverUser = await storageHelpers.getUserFromServer(newServerUrl);
 
-      setUser(serverUser);
+      if (Object.keys(serverUser).length) setUser(serverUser);
     }
     fetchData();
   }, []);
@@ -186,14 +151,15 @@ const Main = props => {
   //   saveStorage();
   // }, [settings]);
 
-  // const saveToStorage = async () =>
-  //   await storeData({
-  //     settings
-  //   });
+  const saveUserToStorage = async () =>
+    await storeData({
+      user
+    });
   console.log(user);
   if (!fontLoaded) {
     return <AppLoading />;
   }
+  console.log("UUUSSSSEEEERRRR", user);
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>

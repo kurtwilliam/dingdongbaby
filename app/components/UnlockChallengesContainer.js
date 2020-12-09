@@ -33,8 +33,6 @@ const styles = StyleSheet.create({
   }),
   challengesScroll: theme => ({
     width: "100%",
-    paddingLeft: 16,
-    paddingRight: 16,
     flex: 1,
     flexDirection: "column"
   })

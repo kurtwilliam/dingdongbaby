@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 export default {
   getUserFromServer: async () =>
@@ -16,5 +17,26 @@ export default {
     await axios
       .post("/user/add-completed-challenge", { challenge })
       .then(resp => resp.data)
-      .catch(err => console.log("postAddCompletedChallenge err", err))
+      .catch(err => console.log("postAddCompletedChallenge err", err)),
+
+  setInitialUser: () => ({
+    name: "",
+    gender: "",
+    babyName: "",
+    babyYearOfBirth: null,
+    babyMonthOfBirth: null,
+    babyDayOfBirth: null,
+    babyGender: "",
+    partnerName: "",
+    partnerGender: "",
+    hasCat: false,
+    hasDog: false,
+    dateSignedUp: moment(),
+    hasViewedIntro: false,
+    email: "",
+    password: "",
+    credits: 0,
+    unlockedChallenges: [],
+    completedChallenges: []
+  })
 };

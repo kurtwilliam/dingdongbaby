@@ -4,6 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 import { withTheme } from "react-native-elements";
 import moment from "moment";
 import UserContext from "../state/UserContext";
+import GradientButton from "./GradientButton";
 import storageHelpers from "../helpers/storageHelpers";
 
 function PhotoUploadButton({ theme, image, selectedChallenge }) {
@@ -71,17 +72,9 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
   return (
     <View style={styles.container(theme)}>
       {!image || image === -1 ? (
-        <Button
-          title="Upload Photo"
-          onPress={pickImage}
-          style={[styles.photoButton(theme), styles.photoButtonUpload(theme)]}
-        />
+        <GradientButton copy="Upload Photo" onPress={pickImage} />
       ) : (
-        <Button
-          title="Change Photo"
-          onPress={pickImage}
-          style={[styles.photoButton(theme), styles.photoButtonChange(theme)]}
-        />
+        <GradientButton copy="Change Photo" onPress={pickImage} />
       )}
     </View>
   );
@@ -90,19 +83,9 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
 //rnss
 const styles = StyleSheet.create({
   container: theme => ({
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    width: "100%",
-    paddingBottom: 50,
-    paddingLeft: 12,
-    paddingRight: 12
-  }),
-  photoButton: theme => ({ width: "100%", borderRadius: 8, padding: 12 }),
-  photoButtonUpload: theme => ({}),
-  photoButtonChange: theme => ({}),
-  top: theme => ({})
+    position: "relative",
+    width: "100%"
+  })
 });
 
 export default withTheme(PhotoUploadButton);

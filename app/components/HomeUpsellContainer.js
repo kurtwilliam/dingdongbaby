@@ -38,13 +38,15 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 12,
     backgroundColor: theme.colors.PureWhite,
-    padding: 12
+    padding: 12,
+    marginBottom: 4
   }),
   spacer: { width: "100%", height: 12 },
   comment: theme => ({
     paddingTop: 12,
     fontSize: 12,
-    color: theme.colors.G6
+    color: theme.colors.G6,
+    textAlign: "center"
   })
 });
 

@@ -26,16 +26,18 @@ const styles = StyleSheet.create({
   challengesCont: theme => ({
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end"
+    alignItems: "flex-start"
   }),
   cont: theme => ({
     position: "relative",
-    backgroundColor: "red"
+    width: "100%",
+    marginBottom: 12
   }),
   challengesFont: theme => ({
-    fontSize: 30,
+    fontSize: 18,
     fontFamily: "SFCompactRoundedBold",
-    textTransform: "lowercase"
+    textTransform: "lowercase",
+    color: theme.colors.G6
   }),
   checkCont: theme => ({
     width: 16,
