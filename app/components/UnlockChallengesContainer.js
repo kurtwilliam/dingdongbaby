@@ -2,13 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { withTheme } from "react-native-elements";
 import ChallengesHeader from "./ChallengesHeader";
-import ChallengesContext from "../state/ChallengesContext";
+import LockedChallengesContext from "../state/LockedChallengesContext";
 import HomeChallenge from "./HomeChallenge";
 import HomeUpsellContainer from "./HomeUpsellContainer";
 import UnlockChallengesHeader from "./UnlockChallengesHeader";
 
 function UnlockChallengesContainer({ theme }) {
-  const { challenges } = useContext(ChallengesContext);
+  const { lockedChallenges } = useContext(LockedChallengesContext);
 
   console.log("ah");
   return (
@@ -17,8 +17,12 @@ function UnlockChallengesContainer({ theme }) {
       <HomeUpsellContainer />
 
       <View style={styles.challengesScroll(theme)}>
-        {challenges.map(challenge => (
-          <HomeChallenge key={challenge.id} challenge={challenge} />
+        {lockedChallenges.map(challenge => (
+          <HomeChallenge
+            key={challenge.id}
+            challenge={challenge}
+            locked={true}
+          />
         ))}
       </View>
     </View>

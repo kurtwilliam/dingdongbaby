@@ -6,7 +6,7 @@ import ChallengeDetails from "./ChallengeDetails";
 
 import { withTheme } from "react-native-elements";
 
-function HomeChallenge({ theme, challenge }) {
+function HomeChallenge({ theme, challenge, locked }) {
   const { setSelectedChallenge } = useContext(AppContext);
   const navigation = useNavigation();
 
@@ -18,7 +18,7 @@ function HomeChallenge({ theme, challenge }) {
 
   // TODO: refactor color of difficulty
   return (
-    <Pressable onPress={() => navigateToChallenge()}>
+    <Pressable onPress={() => (locked ? null : navigateToChallenge())}>
       <View style={styles.container(theme)}>
         <ChallengeDetails challenge={challenge} />
       </View>

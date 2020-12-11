@@ -6,9 +6,11 @@ import GradientButton from "./GradientButton";
 import CircleBar from "./CircleBar";
 
 import { withTheme } from "react-native-elements";
+import { helpers } from "../helpers/helpers";
 
 function HomeUpsellContainer({ theme, challenge }) {
-  // const { setSelectedChallenge } = useContext(AppContext);
+  const { app } = useContext(AppContext);
+  console.log(app);
   // const navigation = useNavigation();
 
   // const navigateToChallenge = () => {
@@ -24,8 +26,7 @@ function HomeUpsellContainer({ theme, challenge }) {
       <View style={styles.spacer}></View>
       <CircleBar />
       <Text style={styles.comment(theme)}>
-        hint - you should definitely not do it, your kid will look back and
-        wonder what was wrong with you
+        {helpers.randomFromArray(app.salesCopy)}
       </Text>
     </View>
   );
