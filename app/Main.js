@@ -9,10 +9,9 @@ import { useFonts } from "expo-font";
 import { AppLoading } from "expo";
 import axios from "axios";
 
-import LockedChallengesContext from "./state/LockedChallengesContext";
-import ChallengesContext from "./state/ChallengesContext";
 import UserContext from "./state/UserContext";
 import AppContext from "./state/AppContext";
+import SettingsContext from "./state/SettingsContext";
 import {
   storeUserData,
   getUserData,
@@ -22,9 +21,11 @@ import {
 import HomeScreen from "./screens/HomeScreen";
 import IntroScreen from "./screens/IntroScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import SettingScreen from "./screens/SettingScreen";
 import ChallengeScreen from "./screens/ChallengeScreen";
 import theme from "./theme";
 import storageHelpers from "./helpers/storageHelpers";
+import { allSettings } from "./helpers/appData";
 
 const Stack = createStackNavigator();
 // const isTesting = true;
@@ -36,11 +37,10 @@ axios.defaults.baseURL = `https://dindongbaby.loca.lt`;
 
 //rsf
 const Main = props => {
-  const [lockedChallenges, setLockedChallenges] = useState([]);
-  const [challenges, setChallenges] = useState([]);
   const [app, setApp] = useState({});
   const [user, setUser] = useState({});
   const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const [selectedSetting, setSelectedSetting] = useState({});
   const [fontLoaded] = useFonts({
     SFCompactRoundedBold: require("../assets/fonts/SF-Compact-Rounded-Bold.otf")
   });
@@ -66,8 +66,6 @@ const Main = props => {
           }
         })
         .catch(err => console.log(err));
-      setChallenges(appCacheData.challenges);
-      setLockedChallenges(appCacheData.lockedChallenges);
 
       let userCacheData;
       await getUserData()
@@ -89,83 +87,6 @@ const Main = props => {
 
       // TODO fetch data from server from DB if Authenticated
 
-      // setSettings(
-      //   Object.keys(settings).length > 0
-      //     ? settings
-      //     : [
-      //         {
-      //           id: "darkMode",
-      //           title: "Dark Mode",
-      //           selected: false,
-      //           description: "Makes the UI dark.",
-
-      //           selectedSlant: Math.random() > 0.5 ? "-1deg" : "1deg"
-      //         }
-      //       ]
-      // );
-      // setChallenges([
-      //   {
-      //     id: 1,
-      //     name: `Bring me my mount`,
-      //     desc: `Do your best to capture baby upon the household steed (pet). If you don't have a pet try their favourite stuffed animal, vegetable or a loaf of fresh bread.`,
-      //     emoji: `🏇`,
-      //     captions: ["I shall protect you, mother! TO WAR!!"],
-      //     hashtags: [],
-      //     warning:
-      //       "Ride your pet ride it irig did id i didn't even know that holy guacamoe",
-      //     tip:
-      //       "Ride your pet ride it irig did id i didn't even know that holy guacamoeRide your pet ride it irig did id i didn't even know that holy guacamoe",
-      //     difficulty: 2
-      //   },
-      //   {
-      //     id: 2,
-      //     name: `Lil Muscle`,
-      //     desc: `Use makeup to contour muscles, add a headband for extra effect.`,
-      //     emoji: `🥋`,
-      //     captions: ["I traine very day lol"],
-      //     hashtags: ["muscle", "train", "yoyo"],
-      //     warning: "MUSCLEEEEEEEEEE MUSCLE MUCLSE MUSLCEM MULSCEL",
-      //     tip:
-      //       "Ride your pet ride it irig did id i didn't even know that holy guacamoe",
-      //     difficulty: 1
-      //   },
-      //   {
-      //     id: 3,
-      //     name: `Baby Daddy`,
-      //     desc: `Your baby is now daddy. Please make them look like daddy (but ideally more handsome).`,
-      //     emoji: `🧍‍♂️`,
-      //     captions: ["I shall protect you, mother! TO WAR!!"],
-      //     hashtags: [],
-      //     warning: "",
-      //     tip: "",
-      //     difficulty: 2
-      //   },
-      //   {
-      //     id: 4,
-      //     name: `Mini Gordon Ramsay`,
-      //     desc: `BACK TO THE KITCHEN! Dress your baby as a chef then feed them food they dislike, so they look like a food critic eating something revolting.`,
-      //     emoji: `🏇`,
-      //     captions: [
-      //       "GRANDMA COULD MAKE BETTER FOOD THAN THIS",
-      //       "Mom I told you more sugar. What is this?!"
-      //     ],
-      //     hashtags: [],
-      //     warning: "",
-      //     tip: "",
-      //     difficulty: 2
-      //   },
-      //   {
-      //     id: 5,
-      //     name: `Bugah want rock`,
-      //     desc: `Me baby. Me caveman. Want thick eyebrow, soft loincloth, good rocks for make play.`,
-      //     emoji: `🏇`,
-      //     captions: [""],
-      //     hashtags: [],
-      //     warning: "",
-      //     tip: "",
-      //     difficulty: 1
-      //   }
-      // ]);
       // want to see if server or cache is more recent
       // let serverUser;
       // console.log("CACHE DATA", cacheData);
@@ -194,47 +115,49 @@ const Main = props => {
   if (!fontLoaded || !user) {
     return <AppLoading />;
   }
-  console.log("UUUSSSSEEEERRRR", user);
-  console.log("aoaooaaoao", app);
+
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <ChallengesContext.Provider value={{ challenges, setChallenges }}>
-          <LockedChallengesContext.Provider
-            value={{ lockedChallenges, setLockedChallenges }}
+        <UserContext.Provider value={{ user, setUser }}>
+          <AppContext.Provider
+            value={{ selectedChallenge, setSelectedChallenge, app }}
           >
-            <UserContext.Provider value={{ user, setUser }}>
-              <AppContext.Provider
-                value={{ selectedChallenge, setSelectedChallenge, app }}
-              >
-                <SafeAreaView style={styles.container(theme)}>
-                  <Stack.Navigator>
-                    <Stack.Screen
-                      name="Intro"
-                      component={IntroScreen}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="Home"
-                      component={HomeScreen}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="Challenge"
-                      component={ChallengeScreen}
-                      options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                      name="Settings"
-                      component={SettingsScreen}
-                      options={{ headerShown: false }}
-                    />
-                  </Stack.Navigator>
-                </SafeAreaView>
-              </AppContext.Provider>
-            </UserContext.Provider>
-          </LockedChallengesContext.Provider>
-        </ChallengesContext.Provider>
+            <SettingsContext.Provider
+              value={{ selectedSetting, setSelectedSetting, allSettings }}
+            >
+              <SafeAreaView style={styles.container(theme)}>
+                <Stack.Navigator>
+                  <Stack.Screen
+                    name="Intro"
+                    component={IntroScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Challenge"
+                    component={ChallengeScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Settings"
+                    component={SettingsScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Setting"
+                    component={SettingScreen}
+                    options={{ headerShown: false }}
+                  />
+                </Stack.Navigator>
+              </SafeAreaView>
+            </SettingsContext.Provider>
+          </AppContext.Provider>
+        </UserContext.Provider>
       </ThemeProvider>
     </NavigationContainer>
   );

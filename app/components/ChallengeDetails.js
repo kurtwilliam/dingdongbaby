@@ -19,7 +19,7 @@ const ChallengeDetails = ({
   theme,
   challenge: { name, id, difficulty, emoji }
 }) => (
-  <Fragment>
+  <Fragment key={`${name}${id}`}>
     <View style={styles.containerLeft(theme)}>
       <Text style={styles.name(theme)}>{name}</Text>
       <View style={styles.containerLeftDetails(theme)}>
@@ -40,7 +40,7 @@ const ChallengeDetails = ({
           ]}
         >
           {[...Array(difficulty)].map((e, i) => (
-            <>
+            <Fragment key={`${i}${i}${e}`}>
               <View
                 key={i}
                 style={[
@@ -55,7 +55,7 @@ const ChallengeDetails = ({
               {i === difficulty - 1 ? null : (
                 <Spacer key={`spacer${i}`} width={4} height={"100%"} />
               )}
-            </>
+            </Fragment>
           ))}
         </View>
       </View>
@@ -132,18 +132,18 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 6
   }),
-  difficultyCircle1: theme => ({ backgroundColor: theme.colors.InfoSecondary }),
+  difficultyCircle1: theme => ({ backgroundColor: theme.colors.Blue2 }),
   difficultyCircle2: theme => ({
-    backgroundColor: theme.colors.WarningSecondary
+    backgroundColor: theme.colors.Yellow2
   }),
   difficultyCircle3: theme => ({
-    backgroundColor: theme.colors.ErrorSecondary
+    backgroundColor: theme.colors.Red2
   }),
-  difficulty1: theme => ({ backgroundColor: theme.colors.InfoTertiary }),
+  difficulty1: theme => ({ backgroundColor: theme.colors.Blue1 }),
   difficulty2: theme => ({
-    backgroundColor: theme.colors.WarningTertiary
+    backgroundColor: theme.colors.Yellow1
   }),
-  difficulty3: theme => ({ backgroundColor: theme.colors.ErrorTertiary }),
+  difficulty3: theme => ({ backgroundColor: theme.colors.Red1 }),
   emoji: { fontSize: 32 },
   top: theme => ({})
 });

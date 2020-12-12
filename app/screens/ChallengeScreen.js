@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { withTheme } from "react-native-elements";
 
 import AppContext from "../state/AppContext";
-import ChallengesContext from "../state/ChallengesContext";
 import UserContext from "../state/UserContext";
 import AppBackground from "../components/AppBackground";
 import Alert from "../assets/svgs/Alert";
@@ -11,14 +10,15 @@ import Tip from "../assets/svgs/Tip";
 import XClose from "../assets/svgs/XClose";
 import ChallengeDetails from "../components/ChallengeDetails";
 import PhotoUploadButton from "../components/PhotoUploadButton";
-import GradientButton from "../components/GradientButton";
 import { LinearGradient } from "expo-linear-gradient";
 
 //rsf
 function ChallengeScreen({ navigation, theme }) {
   const { user } = useContext(UserContext);
-  const { challenges } = useContext(ChallengesContext);
-  const { selectedChallenge, setSelectedChallenge } = useContext(AppContext);
+  const { selectedChallenge, setSelectedChallenge, app } = useContext(
+    AppContext
+  );
+  const { challenges } = app;
 
   const image = user.completedChallenges.find(
     obj => obj.challengeId === selectedChallenge
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
     padding: 4,
     background: "lightblue"
   }),
-  tipContainer: theme => ({ backgroundColor: theme.colors.InfoTertiary }),
+  tipContainer: theme => ({ backgroundColor: theme.colors.Blue1 }),
   tipText: theme => ({
-    color: theme.colors.InfoPrimary
+    color: theme.colors.Blue3
   }),
   warning: theme => ({
     width: "100%",
@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
     background: "gold"
   }),
   warningContainer: theme => ({
-    backgroundColor: theme.colors.WarningTertiary
+    backgroundColor: theme.colors.Yellow1
   }),
   warningText: theme => ({
-    color: theme.colors.WarningPrimary
+    color: theme.colors.Yellow3
   })
 });
 

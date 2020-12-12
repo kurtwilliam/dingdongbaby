@@ -1,59 +1,66 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, SafeAreaView, ImageBackground } from "react-native";
-import Card from "../components/Card";
-import SectionTitle from "../components/SectionTitle";
-import Header from "../components/Header";
-import { ChallengesContext } from "../state/ChallengesContext";
+import { StyleSheet, View, Text } from "react-native";
+import AppBackground from "../components/AppBackground";
+import SettingsContext from "../state/SettingsContext";
+import SettingContainer from "../components/SettingContainer";
+import UpsellContainer from "../components/UpsellContainer";
 import { withTheme } from "react-native-elements";
-// const backgroundImage = { uri:  };
+import GradientButton from "../components/GradientButton";
+import HeaderCloseBar from "../components/HeaderCloseBar";
 
 //rsf
-function SettingsScreen({ route, theme, navigation }) {
+function SettingsScreen({ route, theme }) {
+  const { allSettings } = useContext(SettingsContext);
   return (
-    <SafeAreaView style={styles.safeArea(theme)}>
-      {/* <ImageBackground
-        source={require("../assets/AppBackground.png")}
-        style={styles.appBg}
-      > */}
-      {/* <Header navigation={navigation} />
-      <View style={styles.container(theme)}>
-        <SectionTitle sectionTitle={"Settings"} />
-        <View style={styles.counterContainer}>
-          {settings
-            ? settings.map((setting, i) =>
-                setting ? <Card key={i} setting={setting} index={i} /> : null
-              )
-            : null}
-        </View>
-      </View> */}
-      {/* </ImageBackground> */}
-    </SafeAreaView>
+    <AppBackground>
+      <View style={styles.headerContainer}>
+        <HeaderCloseBar copy={profile} navigateTo="Home" />
+        <UpsellContainer />
+      </View>
+      <View style={styles.settingsContainer}>
+        {allSettings.map(settingCategory => (
+          <SettingContainer
+            key={settingCategory.title}
+            settingCategory={settingCategory}
+          />
+        ))}
+      </View>
+      <View style={styles.gradientButtonContainer}>
+        <GradientButton copy="upload a challenge idea" />
+      </View>
+      <View style={styles.ethGradCont}>
+        <Text style={styles.ethGrad(theme)}>by ethics gradient</Text>
+        <Text style={styles.version(theme)}>v1.0</Text>
+      </View>
+    </AppBackground>
   );
 }
 
 //rnss
 const styles = StyleSheet.create({
-  appBg: {
-    flex: 1,
+  headerContainer: {
+    padding: 16
+  },
+  gradientButtonContainer: {
     width: "100%",
-    height: "100%",
-    resizeMode: "repeat"
+    padding: 32
   },
-  container: theme => ({
-    flex: 1,
-    padding: 8,
-    paddingTop: 12,
-    flexDirection: "column"
-  }),
-  counterContainer: {
-    flexDirection: "column"
-  },
-  goButton: {
+  ethGradCont: {
+    width: "100%",
+    alignItems: "center",
     justifyContent: "center",
-    alignItems: "center"
+    paddingBottom: 36,
+    paddingTop: 180
   },
-  safeArea: theme => ({
-    flex: 1
+  ethGrad: theme => ({
+    color: theme.colors.G6,
+    fontSize: 16,
+    fontWeight: "bold"
+  }),
+  version: theme => ({
+    color: theme.colors.G4,
+    fontSize: 12,
+    fontWeight: "300"
   })
 });
 

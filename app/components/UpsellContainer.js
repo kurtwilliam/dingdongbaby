@@ -8,7 +8,7 @@ import CircleBar from "./CircleBar";
 import { withTheme } from "react-native-elements";
 import { helpers } from "../helpers/helpers";
 
-function HomeUpsellContainer({ theme, challenge }) {
+function UpsellContainer({ theme, challenge }) {
   const { app } = useContext(AppContext);
   console.log(app);
   // const navigation = useNavigation();
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default withTheme(HomeUpsellContainer);
+export default withTheme(UpsellContainer);

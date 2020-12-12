@@ -1,12 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import SettingsBaby from "../assets/svgs/SettingsBaby";
 import { withTheme } from "react-native-elements";
 
-function HomeSettingsContainer({ theme }) {
+function HomeSettingsContainer({ theme, navigation }) {
+  const navigateToSettings = () => navigation.navigate("Settings");
   return (
     <View style={styles.container(theme)}>
-      <SettingsBaby />
+      <Pressable onPress={() => navigateToSettings()}>
+        <SettingsBaby />
+      </Pressable>
     </View>
   );
 }

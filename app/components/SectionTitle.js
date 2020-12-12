@@ -1,13 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { ChallengesContext } from "../state/ChallengesContext";
 
 import { withTheme } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 
 function SectionTitle({ sectionTitle, theme }) {
-  const { settings } = useContext(ChallengesContext);
-
   return (
     <View style={styles.container(theme)}>
       <Text style={styles.title(theme)}>{sectionTitle}</Text>

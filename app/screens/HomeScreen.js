@@ -20,7 +20,7 @@ import Spacer from "../components/Spacer";
 const HomeScreen = ({ navigation, theme }) => (
   <AppBackground hasNavigationButtons={true}>
     <View>
-      <HomeSettingsContainer />
+      <HomeSettingsContainer navigation={navigation} />
       <ChallengesHeader />
       <Spacer width={"100%"} height={24} />
       <View style={styles.darkContainer(theme)}>
