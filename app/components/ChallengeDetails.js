@@ -4,16 +4,9 @@ import { useNavigation } from "@react-navigation/native";
 import AppContext from "../state/AppContext";
 import Star from "../assets/svgs/Star";
 import Spacer from "./Spacer";
+import { helpers } from "../helpers/helpers";
 
 import { withTheme } from "react-native-elements";
-
-const calcId = id => {
-  let newId = id;
-  let length = id.toString().length;
-  if (length === 1) newId = "00" + id;
-  else if (length === 2) newId = "0" + id;
-  return newId;
-};
 
 const ChallengeDetails = ({
   theme,
@@ -24,7 +17,9 @@ const ChallengeDetails = ({
       <Text style={styles.name(theme)}>{name}</Text>
       <View style={styles.containerLeftDetails(theme)}>
         <View style={styles.favContainer(theme)}>
-          <Text style={styles.idText(theme)}>{calcId(id)}</Text>
+          <Text style={styles.idText(theme)}>
+            {helpers.numberToThreeDigits(id)}
+          </Text>
           <View style={styles.fav(theme)}>
             <Star color={theme.colors.G2} />
           </View>

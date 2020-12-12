@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   cont: theme => ({
     position: "relative",
     width: "100%",
+    marginTop: 38,
     marginBottom: 12
   }),
   challengesFont: theme => ({

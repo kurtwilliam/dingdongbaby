@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { withTheme } from "react-native-elements";
 import moment from "moment";
@@ -9,7 +9,7 @@ import storageHelpers from "../helpers/storageHelpers";
 
 function PhotoUploadButton({ theme, image, selectedChallenge }) {
   const { user, setUser } = useContext(UserContext);
-
+  console.log("user");
   const pickImage = async () => {
     () => {
       (async () => {
@@ -34,38 +34,43 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
     if (!result.cancelled) {
       // don't mutate user PLS LOL
       const newUser = JSON.parse(JSON.stringify(user));
-      const thisImageIndex = newUser.completedPhotos.indexOf(
+      console.log("HEREE", newUser);
+
+      const thisImageIndex = newUser.completedChallenges.indexOf(
         challenge => challenge.challengeId === selectedChallenge
       );
       let newData = {};
       if (thisImageIndex >= 0) {
-        newUser.completedPhotos[thisImageIndex].path = result.uri;
-        newUser.completedPhotos[
+        newUser.completedChallenges[thisImageIndex].path = result.uri;
+        newUser.completedChallenges[
           thisImageIndex
         ].dateUploaded = moment().format();
-        newUser.completedPhotos[thisImageIndex].width = result.width;
-        newUser.completedPhotos[thisImageIndex].height = result.height;
-        newData = newUser.completedPhotos[thisImageIndex];
+        newUser.completedChallenges[thisImageIndex].width = result.width;
+        newUser.completedChallenges[thisImageIndex].height = result.height;
+        newData = newUser.completedChallenges[thisImageIndex];
       } else {
-        newUser.completedPhotos.push({
-          id: newUser.completedPhotos.length,
+        newUser.completedChallenges.push({
+          id: newUser.completedChallenges.length,
           challengeId: selectedChallenge,
           path: result.uri,
           dateUploaded: moment().format(),
           height: result.height,
           width: result.width
         });
-        newData = newUser.completedPhotos[newUser.completedPhotos.length - 1];
+        newData =
+          newUser.completedChallenges[newUser.completedChallenges.length - 1];
       }
 
+      setUser(newUser);
+
       // TODO: Edit user on server
-      await storageHelpers
-        .postAddCompletedChallenge(newData)
-        .then(resp => {
-          console.log("postAddCompletedChallenge ", resp);
-          return setUser(newUser);
-        })
-        .catch(err => console.log("err postAddCompletedChallenge ", err));
+      // await storageHelpers
+      //   .postAddCompletedChallenge(newData)
+      //   .then(resp => {
+      //     console.log("postAddCompletedChallenge ", resp);
+      //     return setUser(newUser);
+      //   })
+      //   .catch(err => console.log("err postAddCompletedChallenge ", err));
     }
   };
 

@@ -4,14 +4,14 @@ import { LinearGradient } from "expo-linear-gradient";
 
 import { withTheme } from "react-native-elements";
 
-const GradientButton = ({ theme, copy }) => (
+const GradientButton = ({ theme, copy, onPress }) => (
   <LinearGradient
     colors={theme.colors.Gradient}
     style={[styles.gradientBorder(theme), theme.shadow]}
     start={[0, 0]}
     end={[1, 1]}
   >
-    <TouchableOpacity style={styles.button(theme)}>
+    <TouchableOpacity style={styles.button(theme)} onPress={onPress}>
       <Text style={styles.text(theme)}>{copy}</Text>
     </TouchableOpacity>
   </LinearGradient>

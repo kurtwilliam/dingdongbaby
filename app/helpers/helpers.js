@@ -18,5 +18,12 @@ export const helpers = {
       S4()
     );
   },
-  randomFromArray: arr => arr[Math.floor(Math.random() * arr.length)]
+  randomFromArray: arr => arr[Math.floor(Math.random() * arr.length)],
+  numberToThreeDigits: id => {
+    let newId = id;
+    let length = id.toString().length;
+    if (length === 1) newId = "00" + id;
+    else if (length === 2) newId = "0" + id;
+    return newId;
+  }
 };

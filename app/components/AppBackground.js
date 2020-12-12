@@ -14,11 +14,14 @@ const AppBackground = ({ theme, children, hasNavigationButtons }) => (
   <SafeAreaView style={styles.safeArea(theme)}>
     <ImageBackground
       source={require("../assets/AppBackground.png")}
-      style={[styles.scroll, { resizeMode: "repeat" }]}
+      style={[styles.scroll, { resizeMode: "repeat", height: "100%" }]}
     >
       <View style={styles.scroll}>
-        <ScrollView style={[styles.scroll]}>
-          <View>
+        <ScrollView
+          style={[styles.scroll]}
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          <View style={{ flex: 1 }}>
             <Spacer width={"100%"} height={32} />
             {children}
           </View>
@@ -35,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: theme.colors.BGBeige
   }),
-  scroll: { flexDirection: "column", flex: 1 }
+  scroll: { flexDirection: "column", flex: 1, height: "100%" }
 });
 
 export default withTheme(AppBackground);
