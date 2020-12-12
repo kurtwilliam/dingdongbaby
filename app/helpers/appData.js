@@ -4,7 +4,7 @@ import moment from "moment";
 export const allSettings = [
   {
     title: "login settings",
-    settings: [{ title: "email" }]
+    settings: [{ title: "email", inputs: [{ name: "email", type: "text" }] }]
   },
   {
     title: "baby",
@@ -43,18 +43,16 @@ export const initialUser = {
   credits: 0,
   lastUpdated: moment(),
   completedChallenges: [], //array of photos
-  family: {
-    name: "",
-    gender: "",
-    babyName: "",
-    babyYearOfBirth: null,
-    babyMonthOfBirth: null,
-    babyDayOfBirth: null,
-    babyGender: "",
-    partnerName: "",
-    partnerGender: "",
-    sharingLinks: []
-  }
+  name: "",
+  gender: "",
+  babyName: "",
+  babyYearOfBirth: null,
+  babyMonthOfBirth: null,
+  babyDayOfBirth: null,
+  babyGender: "",
+  partnerName: "",
+  partnerGender: "",
+  sharingLinks: []
 };
 
 export const initialApp = {

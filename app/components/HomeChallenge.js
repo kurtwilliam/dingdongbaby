@@ -11,7 +11,6 @@ function HomeChallenge({ theme, challenge, locked }) {
   const navigation = useNavigation();
 
   const navigateToChallenge = () => {
-    console.log("navigate to challenge", navigation);
     setSelectedChallenge(challenge.id);
     return navigation.navigate("Challenge");
   };

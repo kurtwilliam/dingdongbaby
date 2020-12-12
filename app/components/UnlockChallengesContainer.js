@@ -9,8 +9,6 @@ import UnlockChallengesHeader from "./UnlockChallengesHeader";
 
 function UnlockChallengesContainer({ theme }) {
   const { app } = useContext(AppContext);
-
-  console.log("ah", app);
   return (
     <View style={styles.container(theme)}>
       <UnlockChallengesHeader />

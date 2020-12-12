@@ -36,10 +36,11 @@ const styles = StyleSheet.create({
     fontWeight: "600"
   }),
   XCloseCont: {
+    padding: 8,
     position: "absolute",
-    right: 0,
+    right: -8,
     top: "50%",
-    transform: [{ translateY: -6 }]
+    transform: [{ translateY: -14 }]
   }
 });
 

@@ -10,7 +10,6 @@ import { helpers } from "../helpers/helpers";
 
 function UpsellContainer({ theme, challenge }) {
   const { app } = useContext(AppContext);
-  console.log(app);
   // const navigation = useNavigation();
 
   // const navigateToChallenge = () => {

@@ -25,7 +25,6 @@ const HomeScreen = ({ navigation, theme }) => (
       <Spacer width={"100%"} height={24} />
       <View style={styles.darkContainer(theme)}>
         <ChallengesContainer />
-        {/* <Spacer width={"100%"} height={30} /> */}
         <UnlockChallengesContainer />
       </View>
     </View>

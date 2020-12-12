@@ -1,6 +1,6 @@
 import axios from "axios";
 import moment from "moment";
-import appData from "./appData";
+import { initialUser, initialApp } from "./appData";
 
 export default {
   postIsCacheOrServerNewer: async cacheData =>
@@ -37,7 +37,7 @@ export default {
       .then(resp => resp.data)
       .catch(err => console.log("postAddCompletedChallenge err", err)),
 
-  setInitialUser: () => appData.initialUser,
+  setInitialUser: initialUser,
 
-  setInitialApp: () => appData.initialApp
+  setInitialApp: initialApp
 };

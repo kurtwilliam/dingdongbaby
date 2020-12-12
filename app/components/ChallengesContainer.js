@@ -9,7 +9,6 @@ function ChallengesContainer({ theme }) {
   const { app } = useContext(AppContext);
   const { challenges } = app;
 
-  console.log("ah");
   return (
     <View style={styles.container(theme)}>
       <View style={styles.challengesScroll(theme)}>

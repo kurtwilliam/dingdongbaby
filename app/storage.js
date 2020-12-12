@@ -1,10 +1,12 @@
 import AsyncStorage from "@react-native-community/async-storage";
 const STORAGE_KEY = "ddb-user";
 const STORAGE_KEY_APP = "ddb-app";
-export const storeUserData = async appState => {
+export const storeUserData = async userState => {
   try {
-    const jsonAppState = JSON.stringify(appState);
-    console.log("appState", appState);
+    console.log("userStatedddddddddddd", userState);
+
+    const jsonAppState = JSON.stringify(userState);
+    // console.log("userState", userState);
 
     await AsyncStorage.setItem(STORAGE_KEY, jsonAppState).catch(err =>
       console.log(err)
@@ -55,4 +57,15 @@ export const getAppData = async () => {
 
     // error reading value
   }
+};
+
+export const clearAll = async () => {
+  try {
+    console.log("CLEARNING THE DATA BYEEEEEEE");
+    await AsyncStorage.clear();
+  } catch (e) {
+    // clear error
+  }
+
+  console.log("Done.");
 };

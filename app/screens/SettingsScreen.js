@@ -14,7 +14,7 @@ function SettingsScreen({ route, theme }) {
   return (
     <AppBackground>
       <View style={styles.headerContainer}>
-        <HeaderCloseBar copy={profile} navigateTo="Home" />
+        <HeaderCloseBar copy="profile" navigateTo="Home" />
         <UpsellContainer />
       </View>
       <View style={styles.settingsContainer}>

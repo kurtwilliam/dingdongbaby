@@ -16,7 +16,8 @@ import {
   storeUserData,
   getUserData,
   getAppData,
-  storeAppData
+  storeAppData,
+  clearAll
 } from "./storage";
 import HomeScreen from "./screens/HomeScreen";
 import IntroScreen from "./screens/IntroScreen";
@@ -58,7 +59,7 @@ const Main = props => {
             setApp(data);
             return (appCacheData = data);
           } else {
-            let newApp = storageHelpers.setInitialApp();
+            let newApp = storageHelpers.setInitialApp;
             console.log("storeAppData", newApp);
             setApp(newApp);
             storeAppData(newApp);
@@ -67,20 +68,17 @@ const Main = props => {
         })
         .catch(err => console.log(err));
 
-      let userCacheData;
       await getUserData()
         .then(data => {
           console.log("storageData", data);
           if (Object.keys(data).length) {
             setUser(data);
             console.log("setUser", data);
-            return (userCacheData = data);
+            return;
           } else {
-            let newUser = storageHelpers.setInitialUser();
+            let newUser = storageHelpers.setInitialUser;
             setUser(newUser);
-            storeUserData(newUser);
-            console.log("storeUserData", newUser);
-            return (userCacheData = newUser);
+            return;
           }
         })
         .catch(err => console.log(err));
@@ -106,11 +104,18 @@ const Main = props => {
 
   //   saveStorage();
   // }, [settings]);
+  useEffect(() => {
+    async function storeUserDataAsync() {
+      return storeUserData(user);
+    }
+    storeUserDataAsync();
+  }, [user]);
 
-  const saveUserToStorage = async () =>
-    await storeUserData({
-      user
-    });
+  const updateUser = (value, name) => {
+    let newUser = JSON.parse(JSON.stringify(user));
+    newUser[name] = value;
+    setUser(newUser);
+  };
 
   if (!fontLoaded || !user) {
     return <AppLoading />;
@@ -119,7 +124,7 @@ const Main = props => {
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, updateUser }}>
           <AppContext.Provider
             value={{ selectedChallenge, setSelectedChallenge, app }}
           >
