@@ -50,34 +50,35 @@ const Main = props => {
     async function fetchData() {
       // const ip = await storageHelpers.getIPFromAmazon();
       // setIpAddress(ip.trim());
-      let appCacheData;
+      // let appCacheData;
       await getAppData()
         .then(data => {
-          console.log("getAppData", data);
-          if (Object.keys(data).length) {
-            console.log("setApp", data);
+          console.log("getAppData");
+          if (data && Object.keys(data).length) {
+            console.log("setApp");
             setApp(data);
-            return (appCacheData = data);
+            return;
           } else {
             let newApp = storageHelpers.setInitialApp;
-            console.log("storeAppData", newApp);
+            console.log("storeAppData");
             setApp(newApp);
             storeAppData(newApp);
-            return (appCacheData = newApp);
+            return;
           }
         })
         .catch(err => console.log(err));
 
       await getUserData()
         .then(data => {
-          console.log("storageData", data);
-          if (Object.keys(data).length) {
+          console.log("storageData");
+          if (data && Object.keys(data).length) {
             setUser(data);
-            console.log("setUser", data);
+            console.log("setUser");
             return;
           } else {
             let newUser = storageHelpers.setInitialUser;
             setUser(newUser);
+            storeUserData(newUser);
             return;
           }
         })
@@ -94,6 +95,7 @@ const Main = props => {
 
       // if (Object.keys(serverUser).length) setUser(serverUser);
     }
+    // clearAll();
     fetchData();
   }, []);
 
@@ -105,9 +107,7 @@ const Main = props => {
   //   saveStorage();
   // }, [settings]);
   useEffect(() => {
-    async function storeUserDataAsync() {
-      return storeUserData(user);
-    }
+    const storeUserDataAsync = async () => await storeUserData(user);
     storeUserDataAsync();
   }, [user]);
 

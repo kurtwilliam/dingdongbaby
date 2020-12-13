@@ -39,7 +39,7 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
       const thisImageIndex = newUser.completedChallenges.indexOf(
         challenge => challenge.challengeId === selectedChallenge
       );
-      let newData = {};
+      // let newData = {};
       if (thisImageIndex >= 0) {
         newUser.completedChallenges[thisImageIndex].path = result.uri;
         newUser.completedChallenges[
@@ -47,7 +47,7 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
         ].dateUploaded = moment().format();
         newUser.completedChallenges[thisImageIndex].width = result.width;
         newUser.completedChallenges[thisImageIndex].height = result.height;
-        newData = newUser.completedChallenges[thisImageIndex];
+        // newData = newUser.completedChallenges[thisImageIndex];
       } else {
         newUser.completedChallenges.push({
           id: newUser.completedChallenges.length,
@@ -57,9 +57,10 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
           height: result.height,
           width: result.width
         });
-        newData =
-          newUser.completedChallenges[newUser.completedChallenges.length - 1];
+        // newData =
+        //   newUser.completedChallenges[newUser.completedChallenges.length - 1];
       }
+      console.log("new newUsernewUsernewUsernewUsernewUser", newUser);
 
       setUser(newUser);
 
