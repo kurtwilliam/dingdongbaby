@@ -19,7 +19,7 @@ function HomeChallenge({ theme, challenge, locked }) {
   return (
     <Pressable onPress={() => (locked ? null : navigateToChallenge())}>
       <View style={styles.container(theme)}>
-        <ChallengeDetails challenge={challenge} />
+        <ChallengeDetails challenge={challenge} homeChallenge={true} />
       </View>
     </Pressable>
   );

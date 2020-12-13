@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppContext from "../state/AppContext";
 import Star from "../assets/svgs/Star";
@@ -10,7 +10,8 @@ import { withTheme } from "react-native-elements";
 
 const ChallengeDetails = ({
   theme,
-  challenge: { name, id, difficulty, emoji }
+  homeChallenge,
+  challenge: { name, id, difficulty, emoji, photo }
 }) => (
   <Fragment key={`${name}${id}`}>
     <View style={styles.containerLeft(theme)}>
@@ -56,7 +57,15 @@ const ChallengeDetails = ({
       </View>
     </View>
     <View style={styles.containerRight(theme)}>
-      <Text style={styles.emoji}>{emoji}</Text>
+      {homeChallenge && photo ? (
+        <Image
+          resizeMode={"cover"}
+          source={{ uri: photo }}
+          style={styles.photo}
+        />
+      ) : (
+        <Text style={styles.emoji}>{emoji}</Text>
+      )}
     </View>
   </Fragment>
 );
@@ -89,7 +98,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.G1,
     borderRadius: 8,
     minHeight: 75,
-    marginLeft: 8
+    marginLeft: 8,
+    maxHeight: 75
   }),
   favContainer: theme => ({
     justifyContent: "flex-start",
@@ -117,6 +127,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     lineHeight: 14
   }),
+  photo: {
+    width: "100%",
+    maxHeight: "100%",
+    height: "100%",
+    borderRadius: 8
+  },
   difficultyContainer: theme => ({
     padding: 4,
     borderRadius: 50,

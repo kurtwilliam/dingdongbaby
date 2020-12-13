@@ -27,6 +27,7 @@ import ChallengeScreen from "./screens/ChallengeScreen";
 import theme from "./theme";
 import storageHelpers from "./helpers/storageHelpers";
 import { allSettings } from "./helpers/appData";
+import ChallengeDetails from "./components/ChallengeDetails";
 
 const Stack = createStackNavigator();
 // const isTesting = true;
@@ -50,39 +51,52 @@ const Main = props => {
     async function fetchData() {
       // const ip = await storageHelpers.getIPFromAmazon();
       // setIpAddress(ip.trim());
-      // let appCacheData;
+      let appCacheData;
       await getAppData()
         .then(data => {
           console.log("getAppData");
           if (data && Object.keys(data).length) {
             console.log("setApp");
             setApp(data);
-            return;
+            return (appCacheData = data);
           } else {
             let newApp = storageHelpers.setInitialApp;
             console.log("storeAppData");
-            setApp(newApp);
             storeAppData(newApp);
-            return;
+            return (appCacheData = newApp);
           }
         })
         .catch(err => console.log(err));
 
+      let userCacheData;
       await getUserData()
         .then(data => {
           console.log("storageData");
           if (data && Object.keys(data).length) {
-            setUser(data);
             console.log("setUser");
-            return;
+            return (userCacheData = data);
           } else {
             let newUser = storageHelpers.setInitialUser;
-            setUser(newUser);
             storeUserData(newUser);
-            return;
+            return (userCacheData = newUser);
           }
         })
         .catch(err => console.log(err));
+      console.log(
+        "userCacheData.length, appCacheData.length",
+        userCacheData.length,
+        appCacheData.length
+      );
+
+      if (
+        Object.keys(userCacheData).length &&
+        Object.keys(appCacheData).length
+      ) {
+        setPhotoForHomeChallenge(userCacheData, appCacheData);
+      } else {
+        setApp(appCacheData);
+        setUser(userCacheData);
+      }
 
       // TODO fetch data from server from DB if Authenticated
 
@@ -99,13 +113,6 @@ const Main = props => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   async function saveStorage() {
-  //     saveToStorage();
-  //   }
-
-  //   saveStorage();
-  // }, [settings]);
   useEffect(() => {
     const storeUserDataAsync = async () => await storeUserData(user);
     storeUserDataAsync();
@@ -117,14 +124,32 @@ const Main = props => {
     setUser(newUser);
   };
 
+  const setPhotoForHomeChallenge = (userParam, appParam) => {
+    let newUser = JSON.parse(JSON.stringify(userParam));
+    let newApp = JSON.parse(JSON.stringify(appParam ? appParam : app));
+    newUser.completedChallenges.forEach(compChal => {
+      const matchingChalIndex = newApp.challenges.findIndex(
+        chal => chal.id === compChal.challengeId
+      );
+
+      if (matchingChalIndex > -1) {
+        return (newApp.challenges[matchingChalIndex].photo = compChal.path);
+      }
+    });
+    setApp(newApp);
+    setUser(newUser);
+  };
+
   if (!fontLoaded || !user) {
     return <AppLoading />;
   }
-
+  console.log("appappappapp", app);
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
-        <UserContext.Provider value={{ user, setUser, updateUser }}>
+        <UserContext.Provider
+          value={{ user, setUser, updateUser, setPhotoForHomeChallenge }}
+        >
           <AppContext.Provider
             value={{ selectedChallenge, setSelectedChallenge, app }}
           >

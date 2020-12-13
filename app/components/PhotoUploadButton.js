@@ -8,8 +8,8 @@ import GradientButton from "./GradientButton";
 import storageHelpers from "../helpers/storageHelpers";
 
 function PhotoUploadButton({ theme, image, selectedChallenge }) {
-  const { user, setUser } = useContext(UserContext);
-  console.log("user");
+  const { user, setPhotoForHomeChallenge } = useContext(UserContext);
+
   const pickImage = async () => {
     () => {
       (async () => {
@@ -62,7 +62,7 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
       }
       console.log("new newUsernewUsernewUsernewUsernewUser", newUser);
 
-      setUser(newUser);
+      setPhotoForHomeChallenge(newUser);
 
       // TODO: Edit user on server
       // await storageHelpers
