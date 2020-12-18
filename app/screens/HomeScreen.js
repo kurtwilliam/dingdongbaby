@@ -12,7 +12,7 @@ import ChallengesContainer from "../components/ChallengesContainer";
 import UnlockChallengesContainer from "../components/UnlockChallengesContainer";
 import ChallengesHeader from "../components/ChallengesHeader";
 import HomeSettingsContainer from "../components/HomeSettingsContainer";
-import Spacer from "../components/Spacer";
+import Spacer from "../components/styleComponents/Spacer";
 
 // TODO: compress bg img further
 

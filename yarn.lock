@@ -1068,6 +1068,13 @@
     xcode "^3.0.0"
     xml-js "^1.6.11"
 
+"@expo/react-native-responsive-image@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@expo/react-native-responsive-image/-/react-native-responsive-image-2.0.0.tgz#c9193ebee1341ace190eaa36d10f7a8af163622a"
+  integrity sha512-j+DKytBV2+7RuM8944zGClQNEc59gCgAX/UfM3eBEsJrQ8j3B9yV5wtrvB3uac9/iRfgNUwZQdvyR0VusJXjxQ==
+  dependencies:
+    react-clone-referenced-element "^1.0.1"
+
 "@expo/vector-icons@^10.0.2":
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-10.2.1.tgz#47fb2fa12d7ad601835babde6bd3ddea7f6fde89"
@@ -5088,6 +5095,11 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+
+react-clone-referenced-element@^1.0.1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.1.0.tgz#9cdda7f2aeb54fea791f3ab8c6ab96c7a77d0158"
+  integrity sha512-FKOsfKbBkPxYE8576EM6uAfHC4rnMpLyH6/TJUL4WcHUEB3EUn8AxPjnnV/IiwSSzsClvHYK+sDELKN/EJ0WYg==
 
 react-devtools-core@^4.6.0:
   version "4.10.0"

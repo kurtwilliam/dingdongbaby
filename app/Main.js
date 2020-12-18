@@ -158,11 +158,15 @@ const Main = props => {
             >
               <SafeAreaView style={styles.container(theme)}>
                 <Stack.Navigator>
-                  <Stack.Screen
-                    name="Intro"
-                    component={IntroScreen}
-                    options={{ headerShown: false }}
-                  />
+                  {user.hasViewedIntro ? (
+                    []
+                  ) : (
+                    <Stack.Screen
+                      name="Intro"
+                      component={IntroScreen}
+                      options={{ headerShown: false }}
+                    />
+                  )}
                   <Stack.Screen
                     name="Home"
                     component={HomeScreen}

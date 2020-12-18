@@ -6,7 +6,7 @@ import {
   ScrollView,
   View
 } from "react-native";
-import Spacer from "./Spacer";
+import Spacer from "./styleComponents/Spacer";
 import NavigationButtons from "./NavigationButtons";
 import { withTheme } from "react-native-elements";
 

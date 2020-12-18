@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Pressable, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppContext from "../state/AppContext";
 import Star from "../assets/svgs/Star";
-import Spacer from "./Spacer";
+import Spacer from "./styleComponents/Spacer";
 import { helpers } from "../helpers/helpers";
 
 import { withTheme } from "react-native-elements";

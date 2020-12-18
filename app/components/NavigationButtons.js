@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { withTheme } from "react-native-elements";
-import Spacer from "./Spacer";
+import Spacer from "./styleComponents/Spacer";
 import Album from "../assets/svgs/Album";
 import Camera from "../assets/svgs/Camera";
 

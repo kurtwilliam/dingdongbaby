@@ -14,6 +14,7 @@ export default {
     Beige1: "#EAE6E1",
     BGBeige: "#F6F3EF",
     PureWhite: "#FFF",
+    PureBlack: "#000",
 
     Green4: "#2C8600",
     Green3: "#52C41A",
