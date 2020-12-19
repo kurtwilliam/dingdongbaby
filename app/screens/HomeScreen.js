@@ -10,26 +10,34 @@ import { withTheme } from "react-native-elements";
 import AppBackground from "../components/AppBackground";
 import ChallengesContainer from "../components/ChallengesContainer";
 import UnlockChallengesContainer from "../components/UnlockChallengesContainer";
-import ChallengesHeader from "../components/ChallengesHeader";
+import HomeHeader from "../components/HomeHeader";
 import HomeSettingsContainer from "../components/HomeSettingsContainer";
 import Spacer from "../components/styleComponents/Spacer";
+import AlbumContainer from "../components/AlbumContainer";
+import AppContext from "../state/AppContext";
 
 // TODO: compress bg img further
-
-//rsf
-const HomeScreen = ({ navigation, theme }) => (
-  <AppBackground hasNavigationButtons={true}>
-    <View>
-      <HomeSettingsContainer navigation={navigation} />
-      <ChallengesHeader />
-      <Spacer width={"100%"} height={24} />
-      <View style={styles.darkContainer(theme)}>
-        <ChallengesContainer />
-        <UnlockChallengesContainer />
+// rsf
+const HomeScreen = ({ navigation, theme }) => {
+  const { selectedHomeScreen } = useContext(AppContext);
+  return (
+    <AppBackground hasNavigationButtons={true}>
+      <View>
+        <HomeSettingsContainer navigation={navigation} />
+        <HomeHeader copy={selectedHomeScreen} />
+        <Spacer width={"100%"} height={24} />
+        {selectedHomeScreen === "challenges" ? (
+          <View style={styles.darkContainer(theme)}>
+            <ChallengesContainer />
+            <UnlockChallengesContainer />
+          </View>
+        ) : (
+          <AlbumContainer />
+        )}
       </View>
-    </View>
-  </AppBackground>
-);
+    </AppBackground>
+  );
+};
 
 //rnss
 const styles = StyleSheet.create({

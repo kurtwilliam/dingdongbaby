@@ -9,7 +9,9 @@ import Alert from "../assets/svgs/Alert";
 import Tip from "../assets/svgs/Tip";
 import ChevronLeft from "../assets/svgs/ChevronLeft";
 import ChallengeDetails from "../components/ChallengeDetails";
+import PhotoCard from "../components/PhotoCard";
 import PhotoUploadButton from "../components/PhotoUploadButton";
+import Spacer from "../components/styleComponents/Spacer";
 import { LinearGradient } from "expo-linear-gradient";
 import HeaderCloseBar from "../components/HeaderCloseBar";
 import Camera from "../assets/svgs/Camera";
@@ -28,7 +30,7 @@ function ChallengeScreen({ navigation, theme }) {
     obj => obj.challengeId === selectedChallenge
   );
   const challenge = challenges.find(chal => chal.id === selectedChallenge);
-  const { desc, warning, tip, id } = challenge;
+  const { desc, warning, tip, id, captions } = challenge;
   const challengeIndex = challenges.findIndex(
     chal => chal.id === selectedChallenge
   );
@@ -49,16 +51,17 @@ function ChallengeScreen({ navigation, theme }) {
         />
         <View style={styles.contentContainer}>
           {image && image.path ? (
-            <Image
-              resizeMode={"cover"}
-              source={{ uri: image.path }}
-              style={{ width: "100%", minHeight: 400, borderRadius: 8 }}
+            <PhotoCard
+              copy={image.caption}
+              date={image.date}
+              image={image.path}
             />
           ) : (
             <View style={styles.photoContainer(theme)}>
               <Camera color={theme.colors.G3} />
             </View>
           )}
+          <Spacer height={12} width="100%" />
           <View style={styles.cardContainer(theme)}>
             <View style={styles.detailsContainer(theme)}>
               <ChallengeDetails challenge={challenge} />
@@ -72,7 +75,9 @@ function ChallengeScreen({ navigation, theme }) {
             <Text style={styles.desc(theme)}>{desc}</Text>
             <PhotoUploadButton
               image={image}
+              captions={captions}
               selectedChallenge={selectedChallenge}
+              navigation={navigation}
             />
           </View>
           {tip.length ? (
@@ -230,8 +235,7 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.G3,
     borderStyle: "dashed",
     flex: 1,
-    borderRadius: 12,
-    marginBottom: 12
+    borderRadius: 12
   }),
   tip: theme => ({
     width: "100%",

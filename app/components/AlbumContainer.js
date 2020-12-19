@@ -1,18 +1,31 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { withTheme } from "react-native-elements";
+import UserContext from "../state/UserContext";
 import AppContext from "../state/AppContext";
-import HomeChallenge from "./HomeChallenge";
+import PhotoCard from "./PhotoCard";
+import moment from "moment";
 
-function ChallengesContainer({ theme }) {
+function AlbumContainer({ theme }) {
+  const { user } = useContext(UserContext);
   const { app } = useContext(AppContext);
+  const { completedChallenges } = user;
   const { challenges } = app;
+  console.log(
+    "completedChallengescompletedChallengescompletedChallenges",
+    completedChallenges
+  );
 
   return (
     <View style={styles.container(theme)}>
       <View style={styles.challengesScroll(theme)}>
-        {challenges.map(challenge => (
-          <HomeChallenge key={challenge.id} challenge={challenge} />
+        {completedChallenges.map(chal => (
+          <PhotoCard
+            key={chal.id}
+            image={chal.path}
+            date={moment().format(chal.dateUploaded, "MMM DD YYYY")}
+            copy={chal.caption}
+          />
         ))}
       </View>
     </View>
@@ -32,4 +45,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default withTheme(ChallengesContainer);
+export default withTheme(AlbumContainer);

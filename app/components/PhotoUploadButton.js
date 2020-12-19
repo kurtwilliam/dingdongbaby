@@ -7,7 +7,13 @@ import UserContext from "../state/UserContext";
 import GradientButton from "./GradientButton";
 import storageHelpers from "../helpers/storageHelpers";
 
-function PhotoUploadButton({ theme, image, selectedChallenge }) {
+function PhotoUploadButton({
+  theme,
+  image,
+  selectedChallenge,
+  captions,
+  navigation
+}) {
   const { user, setPhotoForHomeChallenge } = useContext(UserContext);
 
   const pickImage = async () => {
@@ -47,22 +53,23 @@ function PhotoUploadButton({ theme, image, selectedChallenge }) {
         ].dateUploaded = moment().format();
         newUser.completedChallenges[thisImageIndex].width = result.width;
         newUser.completedChallenges[thisImageIndex].height = result.height;
+        setPhotoForHomeChallenge(newUser);
         // newData = newUser.completedChallenges[thisImageIndex];
       } else {
         newUser.completedChallenges.push({
           id: newUser.completedChallenges.length,
           challengeId: selectedChallenge,
           path: result.uri,
-          dateUploaded: moment().format(),
+          dateUploaded: moment().format("MMM DD YYYY"),
           height: result.height,
-          width: result.width
+          width: result.width,
+          caption: captions[0]
         });
         // newData =
         //   newUser.completedChallenges[newUser.completedChallenges.length - 1];
+        setPhotoForHomeChallenge(newUser);
+        navigation.navigate("Captions");
       }
-      console.log("new newUsernewUsernewUsernewUsernewUser", newUser);
-
-      setPhotoForHomeChallenge(newUser);
 
       // TODO: Edit user on server
       // await storageHelpers

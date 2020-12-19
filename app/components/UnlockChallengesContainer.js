@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { withTheme } from "react-native-elements";
-import ChallengesHeader from "./ChallengesHeader";
 import AppContext from "../state/AppContext";
 import HomeChallenge from "./HomeChallenge";
 import UpsellContainer from "./UpsellContainer";

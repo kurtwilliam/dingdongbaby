@@ -151,6 +151,7 @@ export const initialApp = {
     "hint - you should definitely not do it, your kid will look back and wonder what was wrong with you",
     "your kid won't be cute forever",
     "baby will hate when you show these on their wedding day",
-    "you got a baby, we got funny stuff to do with it"
+    "you got a baby, we got funny stuff to do with it",
+    "don't you want more likes on instagram?"
   ]
 };

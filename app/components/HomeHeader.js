@@ -5,7 +5,7 @@ import { withTheme } from "react-native-elements";
 import Checkmark from "../assets/svgs/Checkmark";
 import CircleBar from "./CircleBar";
 
-function ChallengesHeader({ navigation, theme }) {
+function HomeHeader({ navigation, theme, copy }) {
   const navigateToChallenge = () => {
     console.log("navigate to challenge", navigation);
   };
@@ -15,7 +15,7 @@ function ChallengesHeader({ navigation, theme }) {
   return (
     <View style={styles.cont(theme)}>
       <View style={styles.challengesCont(theme)}>
-        <Text style={styles.challengesFont(theme)}>Challenges</Text>
+        <Text style={styles.challengesFont(theme)}>{copy}</Text>
         <View style={styles.totalCont(theme)}>
           <View style={styles.checkCont(theme)}>
             <Checkmark stroke={theme.colors.G6} />
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   })
 });
 
-export default withTheme(ChallengesHeader);
+export default withTheme(HomeHeader);

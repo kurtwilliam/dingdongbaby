@@ -24,10 +24,10 @@ import IntroScreen from "./screens/IntroScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import SettingScreen from "./screens/SettingScreen";
 import ChallengeScreen from "./screens/ChallengeScreen";
+import CaptionsScreen from "./screens/CaptionsScreen";
 import theme from "./theme";
 import storageHelpers from "./helpers/storageHelpers";
 import { allSettings } from "./helpers/appData";
-import ChallengeDetails from "./components/ChallengeDetails";
 
 const Stack = createStackNavigator();
 // const isTesting = true;
@@ -43,6 +43,7 @@ const Main = props => {
   const [user, setUser] = useState({});
   const [selectedChallenge, setSelectedChallenge] = useState(null);
   const [selectedSetting, setSelectedSetting] = useState({});
+  const [selectedHomeScreen, setSelectedHomeScreen] = useState("challenges");
   const [fontLoaded] = useFonts({
     SFCompactRoundedBold: require("../assets/fonts/SF-Compact-Rounded-Bold.otf")
   });
@@ -110,7 +111,9 @@ const Main = props => {
       // if (Object.keys(serverUser).length) setUser(serverUser);
     }
     // clearAll();
-    fetchData();
+    if (!Object.keys(app).length || !Object.keys(user).length) {
+      fetchData();
+    }
   }, []);
 
   useEffect(() => {
@@ -121,6 +124,16 @@ const Main = props => {
   const updateUser = (value, name) => {
     let newUser = JSON.parse(JSON.stringify(user));
     newUser[name] = value;
+    setUser(newUser);
+  };
+
+  const updateCompletedChallenge = (value, name, id) => {
+    let newUser = JSON.parse(JSON.stringify(user));
+    const thisChallengeIndex = newUser.completedChallenges.findIndex(
+      chal => chal.id === id
+    );
+    newUser.completedChallenges[thisChallengeIndex][name] = value;
+    console.log("newUsernewUsernewUser", newUser);
     setUser(newUser);
   };
 
@@ -143,15 +156,27 @@ const Main = props => {
   if (!fontLoaded || !user) {
     return <AppLoading />;
   }
-  console.log("appappappapp", app);
+
   return (
     <NavigationContainer>
       <ThemeProvider theme={theme}>
         <UserContext.Provider
-          value={{ user, setUser, updateUser, setPhotoForHomeChallenge }}
+          value={{
+            user,
+            setUser,
+            updateUser,
+            setPhotoForHomeChallenge,
+            updateCompletedChallenge
+          }}
         >
           <AppContext.Provider
-            value={{ selectedChallenge, setSelectedChallenge, app }}
+            value={{
+              selectedChallenge,
+              setSelectedChallenge,
+              app,
+              selectedHomeScreen,
+              setSelectedHomeScreen
+            }}
           >
             <SettingsContext.Provider
               value={{ selectedSetting, setSelectedSetting, allSettings }}
@@ -185,6 +210,11 @@ const Main = props => {
                   <Stack.Screen
                     name="Setting"
                     component={SettingScreen}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="Captions"
+                    component={CaptionsScreen}
                     options={{ headerShown: false }}
                   />
                 </Stack.Navigator>

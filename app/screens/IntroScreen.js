@@ -18,7 +18,7 @@ import UserContext from "../state/UserContext";
 function IntroScreen({ navigation, route, theme }) {
   const { updateUser } = useContext(UserContext);
   const navigateHome = () => {
-    updateUser("hasViewedIntro", true);
+    updateUser(true, "hasViewedIntro");
     return navigation.navigate("Home");
   };
 

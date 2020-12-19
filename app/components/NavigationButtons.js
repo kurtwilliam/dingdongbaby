@@ -3,25 +3,54 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { withTheme } from "react-native-elements";
 import Spacer from "./styleComponents/Spacer";
 import Album from "../assets/svgs/Album";
+import AlbumFilled from "../assets/svgs/AlbumFilled";
 import Camera from "../assets/svgs/Camera";
+import CameraFilled from "../assets/svgs/CameraFilled";
+import AppContext from "../state/AppContext";
 
 function NavigationButtons({ theme }) {
+  const { setSelectedHomeScreen, selectedHomeScreen } = useContext(AppContext);
+  console.log(selectedHomeScreen);
   return (
     <View style={styles.cont(theme)}>
       <TouchableOpacity
         style={styles.button(theme)}
-        onPress={() => console.log("first button TODO Navigate")}
+        onPress={() => setSelectedHomeScreen("challenges")}
       >
-        <Camera />
-        <Text style={styles.challengesFont(theme)}>challenges</Text>
+        {selectedHomeScreen === "challenges" ? <CameraFilled /> : <Camera />}
+        <Text
+          style={[
+            styles.challengesFont(theme),
+            {
+              color:
+                selectedHomeScreen === "challenges"
+                  ? theme.colors.G7
+                  : theme.colors.G6
+            }
+          ]}
+        >
+          challenges
+        </Text>
       </TouchableOpacity>
       <Spacer width={4} height={1} />
       <TouchableOpacity
         style={styles.button(theme)}
-        onPress={() => console.log("third button")}
+        onPress={() => setSelectedHomeScreen("album")}
       >
-        <Album />
-        <Text style={styles.challengesFont(theme)}>album</Text>
+        {selectedHomeScreen === "album" ? <AlbumFilled /> : <Album />}
+        <Text
+          style={[
+            styles.challengesFont(theme),
+            {
+              color:
+                selectedHomeScreen === "album"
+                  ? theme.colors.G7
+                  : theme.colors.G6
+            }
+          ]}
+        >
+          album
+        </Text>
       </TouchableOpacity>
     </View>
   );
