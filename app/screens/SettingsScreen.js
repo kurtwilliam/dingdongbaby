@@ -5,7 +5,7 @@ import SettingsContext from "../state/SettingsContext";
 import SettingContainer from "../components/SettingContainer";
 import UpsellContainer from "../components/UpsellContainer";
 import { withTheme } from "react-native-elements";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/styleComponents/GradientButton";
 import HeaderCloseBar from "../components/HeaderCloseBar";
 
 //rsf

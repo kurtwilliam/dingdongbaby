@@ -11,7 +11,7 @@ import Spacer from "../components/styleComponents/Spacer";
 import TextG616 from "../components/styleComponents/TextG616";
 import TextG916 from "../components/styleComponents/TextG916";
 import HeaderCloseBar from "../components/HeaderCloseBar";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/styleComponents/GradientButton";
 import { helpers } from "../helpers/helpers";
 
 //rsf
@@ -25,7 +25,9 @@ function CaptionsScreen({ navigation, theme }) {
   const { id, captions } = challenge;
 
   useEffect(() => {
-    setCustomText(captions[selectedCaption]);
+    if (selectedCaption !== null) {
+      setCustomText(captions[selectedCaption]);
+    }
   }, [selectedCaption]);
 
   const navigateToChallenge = () => {
@@ -64,7 +66,10 @@ function CaptionsScreen({ navigation, theme }) {
             value={customText}
             placeholder="or add a custom caption..."
             placeholderTextColor={theme.colors.G5}
-            onChangeText={text => setCustomText(text)}
+            onChangeText={text => {
+              setSelectedCaption(null);
+              setCustomText(text);
+            }}
           />
         </View>
         <View style={styles.buttonCont}>

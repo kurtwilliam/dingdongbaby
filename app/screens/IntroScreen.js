@@ -5,7 +5,7 @@ import moment from "moment";
 
 import PhotoCard from "../components/PhotoCard";
 import AppBackground from "../components/AppBackground";
-import GradientButton from "../components/GradientButton";
+import GradientButton from "../components/styleComponents/GradientButton";
 import TextPureBlack24 from "../components/styleComponents/TextPureBlack24";
 import Spacer from "../components/styleComponents/Spacer";
 import monk1 from "../assets/placeholders/monk1.png";

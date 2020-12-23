@@ -53,7 +53,7 @@ function ChallengeScreen({ navigation, theme }) {
           {image && image.path ? (
             <PhotoCard
               copy={image.caption}
-              date={image.date}
+              date={image.date ? image.date : image.dateUploaded}
               image={image.path}
             />
           ) : (

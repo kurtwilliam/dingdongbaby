@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AppContext from "../state/AppContext";
-import GradientButton from "./GradientButton";
+import GradientButton from "./styleComponents/GradientButton";
 import CircleBar from "./CircleBar";
 
 import { withTheme } from "react-native-elements";

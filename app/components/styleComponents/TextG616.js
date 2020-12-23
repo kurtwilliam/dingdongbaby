@@ -10,6 +10,7 @@ const TextG616 = ({ theme, copy, addStyles }) => (
         color: theme.colors.G6,
         textTransform: "lowercase",
         fontWeight: "400",
+        zIndex: 10000,
         ...addStyles
       }
     ]}

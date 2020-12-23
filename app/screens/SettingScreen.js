@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
-import { StyleSheet, View, Text, Pressabl, TextInput } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
 import AppBackground from "../components/AppBackground";
-import SettingContainer from "../components/SettingContainer";
-import XClose from "../assets/svgs/XClose";
 import { withTheme } from "react-native-elements";
-import GradientButton from "../components/GradientButton";
 import SettingsContext from "../state/SettingsContext";
 import UserContext from "../state/UserContext";
 import HeaderCloseBar from "../components/HeaderCloseBar";

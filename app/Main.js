@@ -130,10 +130,9 @@ const Main = props => {
   const updateCompletedChallenge = (value, name, id) => {
     let newUser = JSON.parse(JSON.stringify(user));
     const thisChallengeIndex = newUser.completedChallenges.findIndex(
-      chal => chal.id === id
+      chal => chal.challengeId === id
     );
     newUser.completedChallenges[thisChallengeIndex][name] = value;
-    console.log("newUsernewUsernewUser", newUser);
     setUser(newUser);
   };
 
@@ -149,6 +148,7 @@ const Main = props => {
         return (newApp.challenges[matchingChalIndex].photo = compChal.path);
       }
     });
+    console.log("newUser", newUser);
     setApp(newApp);
     setUser(newUser);
   };

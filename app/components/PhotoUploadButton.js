@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, View, Pressable } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { withTheme } from "react-native-elements";
 import moment from "moment";
 import UserContext from "../state/UserContext";
-import GradientButton from "./GradientButton";
-import storageHelpers from "../helpers/storageHelpers";
+import GradientButton from "./styleComponents/GradientButton";
+import BeigeButton from "./styleComponents/BeigeButton";
 
 function PhotoUploadButton({
   theme,
@@ -29,8 +29,9 @@ function PhotoUploadButton({
         }
       })();
     };
+    console.log("hereeeee");
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       quality: 1
     });
@@ -87,7 +88,7 @@ function PhotoUploadButton({
       {!image || image === -1 ? (
         <GradientButton copy="Upload Photo" onPress={pickImage} />
       ) : (
-        <GradientButton copy="Change Photo" onPress={pickImage} />
+        <BeigeButton copy="Change Photo" onPress={pickImage} />
       )}
     </View>
   );

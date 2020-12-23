@@ -7,7 +7,7 @@ import { withTheme } from "react-native-elements";
 const GradientButton = ({ theme, copy, onPress }) => (
   <LinearGradient
     colors={theme.colors.Gradient}
-    style={[styles.gradientBorder(theme), theme.shadow]}
+    style={[styles.gradientBorder(theme)]}
     start={[0, 0]}
     end={[1, 1]}
   >
