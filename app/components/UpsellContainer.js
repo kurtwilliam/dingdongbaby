@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useContext } from "react";
+import { StyleSheet, View, Text } from "react-native";
 import AppContext from "../state/AppContext";
 import GradientButton from "./styleComponents/GradientButton";
 import CircleBar from "./CircleBar";
