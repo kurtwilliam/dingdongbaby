@@ -3,10 +3,10 @@
 ## About
 Dingdong Baby is a photo challenge game for parents with young children, where winning means building an album of funny and unique photos.
 
-Built with React Native, not exported from Expo. Run `yarn start` to start project (please note RN requires an android/iOS emulator to run).
+Built with React Native, not exported from Expo. Run `yarn start` to start project (please note RN requires an android/iOS emulator to run; only tested on Android so far).
 
 ## App Structure
-The App mounts the Main component from the App component. The Main component currently houses the Screen Navigation, App wide state (with React Hooks Create Context API), imports the theme and different styles, and houses the helpers that manage the state. 
+The App mounts the Main component from the App component. The Main component currently houses the Screen Navigation, App wide state (with React Hooks Create Context API), imports the theme and different styles, and also the helpers that manage the state. 
 
 ## Dingdong Baby State
 The application state generally consists of two parts: User and App. Right now, the app uses the phones local storage for storing information about the app, but in the future it will also utilize the Node server and Mongo Atlas database.
